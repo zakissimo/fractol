@@ -6,11 +6,17 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/02 07:58:16 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/02 10:42:46 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "fractol.h"
+
 int	main(void)
 {
+	void	*mlx_id;
+
+	mlx_id = mlx_init();
+	ft_printf("%p\n", mlx_id);
 	return (0);
 }
