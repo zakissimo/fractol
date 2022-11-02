@@ -6,7 +6,7 @@
 #    By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/04 08:44:16 by zhabri            #+#    #+#              #
-#    Updated: 2022/11/02 10:50:16 by zhabri           ###   ########.fr        #
+#    Updated: 2022/11/02 10:52:34 by zhabri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,12 @@ SRCS		= fractol.c
 OBJS		= $(SRCS:.c=.o)
 
 %.o: %.c
-			$(CC) $(CFLAGS) -O3 -c $< -o $@
+			$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME):	$(OBJS)
 			make -C mlx
 			make -C libft
-			$(CC) $(OBJS) $(MLXFLAGS) -o $@
+			$(CC) $(CFLAGS) $(OBJS) $(MLXFLAGS) -o $@
 
 all:		$(NAME)
 
