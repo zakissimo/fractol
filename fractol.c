@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/03 09:07:26 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/03 17:03:19 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 #include "libft/libft.h"
 #include "mlx/mlx.h"
 
-void	destroy_and_free(t_mlx *mlx)
+int	destroy_and_free(t_mlx *mlx)
 {
 	mlx_destroy_image(mlx->ptr, mlx->img->img);
 	mlx_destroy_window(mlx->ptr, mlx->win);
 	mlx_destroy_display(mlx->ptr);
 	free(mlx->ptr);
+	exit(0);
 }
 
-void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
+void	put_pixel(t_image *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -34,12 +35,21 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 
 int	close_all(int key, t_mlx *mlx)
 {
+	ft_printf("Key pressed: %d\n", key);
 	if (key == XK_Escape)
 	{
 		destroy_and_free(mlx);
 		exit(0);
 	}
 	return (0);
+}
+
+void	load_hooks(t_mlx *mlx)
+{
+	mlx_hook(mlx->win, DestroyNotify, StructureNotifyMask, \
+		destroy_and_free, mlx);
+	mlx_key_hook(mlx->win, close_all, mlx);
+	mlx_mouse_hook(mlx->win, close_all, mlx);
 }
 
 int	main(void)
@@ -60,14 +70,14 @@ int	main(void)
 		y = -HEIGHT / 2;
 		while (y < HEIGHT / 2)
 		{
-			my_mlx_pixel_put(&image, x, y, 0x00FF0000);
+			put_pixel(&image, x, y, 0x00FF0000);
 			y++;
 		}
 		x++;
 	}
 	mlx_put_image_to_window(mlx.ptr, mlx.win, image.img, 0, 0);
 	mlx.img = &image;
-	mlx_key_hook(mlx.win, close_all, &mlx);
+	load_hooks(&mlx);
 	mlx_loop(mlx.ptr);
 	return (0);
 }
