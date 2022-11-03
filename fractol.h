@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/02 13:40:13 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/03 08:17:54 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,23 @@
 # include "mlx/mlx_int.h"
 # include <math.h>
 
-# define WIDTH 500
-# define HEIGHT 500
-
-typedef struct s_data
+typedef struct s_image
 {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}			t_data;
+}			t_image;
+
+typedef struct s_mlx
+{
+	void	*ptr;
+	void	*win;
+	t_image	*img;
+}			t_mlx;
+
+# define WIDTH 500
+# define HEIGHT 500
 
 #endif
