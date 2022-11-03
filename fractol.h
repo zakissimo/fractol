@@ -6,16 +6,17 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/03 08:17:54 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/03 08:44:05 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include "libft/libft.h"
 # include "mlx/mlx.h"
+# include "libft/libft.h"
 # include "mlx/mlx_int.h"
+# include <X11/keysymdef.h>
 # include <math.h>
 
 typedef struct s_image
