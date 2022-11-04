@@ -6,7 +6,7 @@
 #    By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/04 08:44:16 by zhabri            #+#    #+#              #
-#    Updated: 2022/11/02 10:52:34 by zhabri           ###   ########.fr        #
+#    Updated: 2022/11/04 10:08:35 by zhabri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ RM			= rm -f
 
 NAME		= fractol
 
-SRCS		= fractol.c
+SRCS		= fractol.c utils.c draw.c
 
 OBJS		= $(SRCS:.c=.o)
 

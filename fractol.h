@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/04 08:52:07 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/04 10:13:20 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,19 @@
 # include "mlx/mlx_int.h"
 # include <math.h>
 
+typedef struct s_pixel
+{
+	int		x;
+	int		y;
+	int		color;
+}			t_pixel;
+
 typedef struct s_image
 {
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
+	int		bpp;
+	int		line_len;
 	int		endian;
 }			t_image;
 
@@ -34,13 +41,14 @@ typedef struct s_mlx
 	t_image	*img;
 }			t_mlx;
 
+void		init(t_mlx *mlx, t_image *image);
 int			destroy_and_free(t_mlx *mlx);
-void		put_pixel(t_image *data, int x, int y, int color);
+void		put_pixel(t_image *img, t_pixel p);
 int			close_all(int key, t_mlx *mlx);
 void		load_hooks(t_mlx *mlx);
 void		draw_square(t_mlx *mlx);
 
-# define WIDTH 500
-# define HEIGHT 500
+# define WIDTH 1920
+# define HEIGHT 1080
 
 #endif
