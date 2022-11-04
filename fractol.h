@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/04 10:13:20 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/04 12:46:47 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int			destroy_and_free(t_mlx *mlx);
 void		put_pixel(t_image *img, t_pixel p);
 int			close_all(int key, t_mlx *mlx);
 void		load_hooks(t_mlx *mlx);
-void		draw_square(t_mlx *mlx);
+void		draw_square(t_mlx *mlx, int len);
+void		draw_circle(t_mlx *mlx, int radius);
 
 # define WIDTH 1920
 # define HEIGHT 1080
