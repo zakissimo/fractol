@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:07:45 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/04 12:47:34 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/05 13:22:43 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	put_pixel(t_image *img, t_pixel p)
 {
 	char	*dst;
 
-	p.x += WIDTH / 2;
+	p.x += WIDTH / 3 * 2;
 	p.y += HEIGHT / 2;
 	dst = img->addr + (p.y * img->line_len + p.x * (img->bpp / 8));
 	*(unsigned int *)dst = p.color;
