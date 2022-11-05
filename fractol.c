@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/05 13:28:20 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/05 13:38:11 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	draw_mandelbrot(t_mlx *mlx)
 	double	old_a;
 	double	old_b;
 
-	max_iter = 100;
+	max_iter = 255;
 	p.x = -WIDTH / 3 * 2;
 	while (p.x < WIDTH / 3)
 	{
@@ -30,24 +30,22 @@ void	draw_mandelbrot(t_mlx *mlx)
 		while (p.y < HEIGHT / 2)
 		{
 			n = 0;
-			p.a = (float)p.x / 500;
-			p.b = (float)p.y / 500;
+			p.a = (double)p.x / 500;
+			p.b = (double)p.y / 500;
 			old_a = p.a;
 			old_b = p.b;
-			while (n < max_iter)
+			while (n < max_iter && fabs(p.a + p.b) < 2)
 			{
 				new_a = p.a * p.a - p.b * p.b;
 				new_b = 2 * p.a * p.b;
 				p.a = new_a + old_a;
 				p.b = new_b + old_b;
-				if (fabs(p.a + p.b) > 2)
-					break ;
 				n++;
 			}
-			if (n == 100)
+			if (n == max_iter)
 				p.color = 0x00000000;
 			else
-				p.color = 0x00FFFFFF;
+				p.color = (int)((double)n / (double)255 * (double)0x00FFFFFFFF);
 			put_pixel(mlx->img, p);
 			p.y++;
 		}
