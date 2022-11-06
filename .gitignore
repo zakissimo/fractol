@@ -1,7 +1,3 @@
-## Mlx related
-Makefile.gen
-/test/mlx-test
-
 ## Editor
 .vscode/*
 *~
