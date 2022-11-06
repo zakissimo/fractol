@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/05 12:32:10 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/06 12:39:00 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include "mlx/mlx.h"
 # include "mlx/mlx_int.h"
 # include <math.h>
+
+# define WIDTH 1920
+# define HEIGHT 1080
 
 typedef struct s_pixel
 {
@@ -51,8 +54,5 @@ void		load_hooks(t_mlx *mlx);
 void		draw_square(t_mlx *mlx, int len);
 void		draw_circle(t_mlx *mlx, int radius);
 void		draw_mandelbrot(t_mlx *mlx);
-
-# define WIDTH 1920
-# define HEIGHT 1080
 
 #endif

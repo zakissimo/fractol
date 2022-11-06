@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/06 12:31:03 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/06 12:39:41 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	get_color(int n, int max_iter)
 {
-	(void)max_iter;
 	const int tokyo_night[] = {0xF7768E,
 								0x9ECE6A,
 								0xE0AF68,
@@ -22,7 +21,10 @@ int	get_color(int n, int max_iter)
 								0x9a7ecc,
 								0x4abaaf,
 								0xa9b1d6};
-	// return ((int)((double)n / (double)max_iter * (double)0x00FFFFFFFF));
+	if (n == max_iter)
+		return (0);
+	if (n == 12345)
+		return ((int)((double)n / (double)255 * (double)0x00FFFFFFFF));
 	return (tokyo_night[n % 7]);
 }
 
@@ -65,10 +67,7 @@ void	draw_mandelbrot(t_mlx *mlx)
 		while (p.y < HEIGHT / 2)
 		{
 			n = get_mandelbrot_iter(p, max_iter);
-			if (n == max_iter)
-				p.color = 0x00000000;
-			else
-				p.color = get_color(n, max_iter);
+			p.color = get_color(n, max_iter);
 			put_pixel(mlx->img, p);
 			p.y++;
 		}
