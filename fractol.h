@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/06 12:39:00 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/06 18:04:48 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ int			close_all(int key, t_mlx *mlx);
 void		load_hooks(t_mlx *mlx);
 void		draw_square(t_mlx *mlx, int len);
 void		draw_circle(t_mlx *mlx, int radius);
-void		draw_mandelbrot(t_mlx *mlx);
+void		draw_mandelbrot(t_mlx *mlx, int zoom);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/06 12:39:41 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/06 18:05:01 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,10 @@ int	get_color(int n, int max_iter)
 								0xa9b1d6};
 	if (n == max_iter)
 		return (0);
-	if (n == 12345)
-		return ((int)((double)n / (double)255 * (double)0x00FFFFFFFF));
 	return (tokyo_night[n % 7]);
 }
 
-int	get_mandelbrot_iter(t_pixel p, int max_iter)
+int	mandelbrot(t_pixel *p, int max_iter, int zoom)
 {
 	int		n;
 	double	new_a;
@@ -37,23 +35,22 @@ int	get_mandelbrot_iter(t_pixel p, int max_iter)
 	double	old_b;
 
 	n = 0;
-	p.a = (double)p.x / 500;
-	p.b = (double)p.y / 500;
-	old_a = p.a;
-	old_b = p.b;
-	// while (n < max_iter && fabs(p.a + p.b) < 3)
-	while (n < max_iter && (p.a * p.a + p.b * p.b) < 4)
+	p->a = (double)p->x / zoom;
+	p->b = (double)p->y / zoom;
+	old_a = p->a;
+	old_b = p->b;
+	while (n < max_iter && fabs(p->a + p->b) < 3)
 	{
-		new_a = p.a * p.a - p.b * p.b;
-		new_b = 2 * p.a * p.b;
-		p.a = new_a + old_a;
-		p.b = new_b + old_b;
+		new_a = p->a * p->a - p->b * p->b;
+		new_b = 2 * p->a * p->b;
+		p->a = new_a + old_a;
+		p->b = new_b + old_b;
 		n++;
 	}
 	return (n);
 }
 
-void	draw_mandelbrot(t_mlx *mlx)
+void	draw_mandelbrot(t_mlx *mlx, int zoom)
 {
 	t_pixel	p;
 	int		n;
@@ -66,7 +63,7 @@ void	draw_mandelbrot(t_mlx *mlx)
 		p.y = -HEIGHT / 2;
 		while (p.y < HEIGHT / 2)
 		{
-			n = get_mandelbrot_iter(p, max_iter);
+			n = mandelbrot(&p, max_iter, zoom);
 			p.color = get_color(n, max_iter);
 			put_pixel(mlx->img, p);
 			p.y++;
@@ -83,7 +80,7 @@ int	main(void)
 
 	init(&mlx, &image);
 	load_hooks(&mlx);
-	draw_mandelbrot(&mlx);
+	draw_mandelbrot(&mlx, 500);
 	mlx_loop(mlx.ptr);
 	return (0);
 }
