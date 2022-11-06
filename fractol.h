@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/06 18:04:48 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/06 19:27:39 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include "mlx/mlx_int.h"
 # include <math.h>
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1200
+# define HEIGHT 800
 
 typedef struct s_pixel
 {

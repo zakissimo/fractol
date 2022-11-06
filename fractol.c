@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/06 18:05:01 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/06 19:32:39 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	draw_mandelbrot(t_mlx *mlx, int zoom)
 	int		n;
 	int		max_iter;
 
-	max_iter = 500;
+	max_iter = 100;
 	p.x = -WIDTH / 3 * 2;
 	while (p.x < WIDTH / 3)
 	{
@@ -72,6 +72,16 @@ void	draw_mandelbrot(t_mlx *mlx, int zoom)
 	}
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img->img, 0, 0);
 }
+//
+// int	zoom(int key, t_mlx *mlx)
+// {
+// 	ft_printf("Key pressed: %d\n", key);
+// 	if (key == 4)
+// 	{
+// 		draw_mandelbrot(mlx, 500);
+// 	}
+// 	return (0);
+// }
 
 int	main(void)
 {
@@ -80,7 +90,8 @@ int	main(void)
 
 	init(&mlx, &image);
 	load_hooks(&mlx);
-	draw_mandelbrot(&mlx, 500);
+	// mlx_mouse_hook(mlx.win, zoom, &mlx);
+	draw_mandelbrot(&mlx, 300);
 	mlx_loop(mlx.ptr);
 	return (0);
 }

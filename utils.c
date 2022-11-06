@@ -6,11 +6,12 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:06:17 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/06 18:12:06 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/06 18:40:32 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "mlx/mlx.h"
 
 void	init(t_mlx *mlx, t_image *image)
 {
@@ -41,23 +42,9 @@ int	close_all(int key, t_mlx *mlx)
 	return (0);
 }
 
-int	zoom(int key, t_mlx *mlx)
-{
-	static int	zoom = 500;
-
-	ft_printf("Key pressed: %d\n", key);
-	if (key == 5)
-	{
-		zoom += 5;
-		draw_mandelbrot(mlx, zoom);
-	}
-	return (0);
-}
-
 void	load_hooks(t_mlx *mlx)
 {
 	mlx_hook(mlx->win, DestroyNotify, StructureNotifyMask, destroy_and_free,
 			mlx);
 	mlx_key_hook(mlx->win, close_all, mlx);
-	mlx_mouse_hook(mlx->win, zoom, mlx);
 }
