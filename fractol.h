@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/07 08:37:13 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/07 09:52:04 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 
 typedef struct s_pixel
 {
-	double	a;
-	double	b;
-	int		x;
-	int		y;
-	int		color;
+	long double	a;
+	long double	b;
+	int			x;
+	int			y;
+	int			color;
 }			t_pixel;
 
 typedef struct s_image
@@ -44,6 +44,11 @@ typedef struct s_draw
 {
 	bool	redraw;
 	int		zoom;
+	int		max_iter;
+	int		start_x;
+	int		start_y;
+	int		end_x;
+	int		end_y;
 }			t_draw;
 
 typedef struct s_mlx
@@ -63,6 +68,6 @@ void		load_hooks(t_mlx *mlx);
 void		put_pixel(t_image *img, t_pixel p);
 void		draw_square(t_mlx *mlx, int len);
 void		draw_circle(t_mlx *mlx, int radius);
-void		draw_mandelbrot(t_mlx *mlx, int zoom);
+void		draw_mandelbrot(t_mlx *mlx);
 
 #endif
