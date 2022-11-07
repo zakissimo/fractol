@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/07 09:52:04 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/07 11:36:37 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_draw
 	int		start_y;
 	int		end_x;
 	int		end_y;
+	int		x_offset;
+	int		y_offset;
 }			t_draw;
 
 typedef struct s_mlx
@@ -65,7 +67,7 @@ int			key_hook(int key, t_mlx *mlx);
 int			mouse_hook(int key, int x, int y, t_mlx *mlx);
 int			handlebrot(t_mlx *mlx);
 void		load_hooks(t_mlx *mlx);
-void		put_pixel(t_image *img, t_pixel p);
+void		put_pixel(t_mlx *mlx, t_pixel p);
 void		draw_square(t_mlx *mlx, int len);
 void		draw_circle(t_mlx *mlx, int radius);
 void		draw_mandelbrot(t_mlx *mlx);

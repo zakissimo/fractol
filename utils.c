@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:06:17 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/07 09:55:34 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/07 11:51:18 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ void	init(t_mlx *mlx, t_image *image, t_draw *draw)
 			&image->endian);
 	draw->zoom = 300;
 	draw->redraw = true;
-	draw->max_iter = 300;
+	draw->max_iter = 100;
 	draw->start_x = -WIDTH / 3 * 2;
 	draw->end_x = WIDTH / 3;
-	draw->start_x = -HEIGHT / 2;
-	draw->end_x = HEIGHT / 2;
+	draw->start_y = -HEIGHT / 2;
+	draw->end_y = HEIGHT / 2;
+	draw->x_offset = WIDTH / 3 * 2;
+	draw->y_offset = HEIGHT / 2;
 	mlx->img = image;
 	mlx->draw = draw;
 }
@@ -58,11 +60,23 @@ int	mouse_hook(int key, int x, int y, t_mlx *mlx)
 	if (key == 4)
 	{
 		mlx->draw->zoom += 5;
+		mlx->draw->x_offset = x;
+		mlx->draw->y_offset = y;
+		mlx->draw->start_x = -x;
+		mlx->draw->end_x = WIDTH - x;
+		mlx->draw->start_y = -y;
+		mlx->draw->end_y = HEIGHT - y;
 		mlx->draw->redraw = true;
 	}
 	if (key == 5)
 	{
 		mlx->draw->zoom -= 5;
+		mlx->draw->x_offset = x;
+		mlx->draw->y_offset = y;
+		mlx->draw->start_x = -x;
+		mlx->draw->end_x = WIDTH - x;
+		mlx->draw->start_y = -y;
+		mlx->draw->end_y = HEIGHT - y;
 		mlx->draw->redraw = true;
 	}
 	return (0);
