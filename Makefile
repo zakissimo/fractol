@@ -6,13 +6,13 @@
 #    By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/04 08:44:16 by zhabri            #+#    #+#              #
-#    Updated: 2022/11/07 08:35:20 by zhabri           ###   ########.fr        #
+#    Updated: 2022/11/07 10:30:14 by zhabri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= gcc
 
-CFLAGS		= -Wall -Wextra -Werror -O3
+CFLAGS		= -Wall -Wextra -Werror -O3 -g
 
 MLXFLAGS	= -Llibft -lft -Lmlx -lmlx -L/usr/lib -lXext -lX11 -lm -lz -lbsd
 

@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/07 08:30:56 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/07 11:09:31 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	mandelbrot(t_pixel *p, int max_iter, int zoom)
 	p->b = (double)p->y / zoom;
 	old_a = p->a;
 	old_b = p->b;
-	while (n < max_iter && fabs(p->a + p->b) < 3)
+	while (n < max_iter && fabsl(p->a + p->b) < 3)
 	{
 		new_a = p->a * p->a - p->b * p->b;
 		new_b = 2 * p->a * p->b;
@@ -46,7 +46,7 @@ int	mandelbrot(t_pixel *p, int max_iter, int zoom)
 	return (n);
 }
 
-void	draw_mandelbrot(t_mlx *mlx, int zoom)
+void	draw_mandelbrot(t_mlx *mlx)
 {
 	t_pixel	p;
 	int		n;
@@ -59,7 +59,7 @@ void	draw_mandelbrot(t_mlx *mlx, int zoom)
 		p.y = -HEIGHT / 2.0;
 		while (p.y < HEIGHT / 2.0)
 		{
-			n = mandelbrot(&p, max_iter, zoom);
+			n = mandelbrot(&p, max_iter, mlx->draw->zoom);
 			p.color = get_color(n, max_iter);
 			put_pixel(mlx->img, p);
 			p.y++;
@@ -73,7 +73,7 @@ int	handlebrot(t_mlx *mlx)
 {
 	if (mlx->draw->redraw)
 	{
-		draw_mandelbrot(mlx, mlx->draw->zoom);
+		draw_mandelbrot(mlx);
 		mlx->draw->redraw = false;
 	}
 	return (0);
