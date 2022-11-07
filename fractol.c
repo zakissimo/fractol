@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/07 15:56:12 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/07 20:10:08 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	mandelbrot(t_pixel *p, t_draw *draw)
 	double	old_b;
 
 	n = 0;
-	p->a = (float)p->x / draw->zoom;
-	p->b = (float)p->y / draw->zoom;
+	p->a = (long double)(p->x - draw->x_offset) / draw->zoom;
+	p->b = (long double)(p->y - draw->y_offset) / draw->zoom;
 	old_a = p->a;
 	old_b = p->b;
-	while (n < draw->max_iter && fabsl(p->a + p->b) < 3)
+	while (n < draw->max_iter && p->a * p->a + p->b * p->b < 4)
 	{
 		new_a = p->a * p->a - p->b * p->b;
 		new_b = 2 * p->a * p->b;
@@ -51,11 +51,11 @@ void	draw_mandelbrot(t_mlx *mlx)
 	int		n;
 	t_pixel	p;
 
-	p.x = mlx->draw->start_x;
-	while (p.x < mlx->draw->end_x)
+	p.x = 0;
+	while (p.x < WIDTH)
 	{
-		p.y = mlx->draw->start_y;
-		while (p.y < mlx->draw->end_y)
+		p.y = 0;
+		while (p.y < HEIGHT)
 		{
 			n = mandelbrot(&p, mlx->draw);
 			p.color = get_color(n, mlx->draw->max_iter);

@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/07 16:24:02 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/07 19:39:36 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,10 @@ typedef struct s_draw
 	bool	redraw;
 	int		zoom;
 	int		max_iter;
-	int		start_x;
-	int		start_y;
-	int		end_x;
-	int		end_y;
 	int		x_offset;
 	int		y_offset;
+	int		x_mouse;
+	int		y_mouse;
 }			t_draw;
 
 typedef struct s_mlx
@@ -68,8 +66,6 @@ int			mouse_hook(int key, int x, int y, t_mlx *mlx);
 int			handlebrot(t_mlx *mlx);
 void		load_hooks(t_mlx *mlx);
 void		put_pixel(t_mlx *mlx, t_pixel p);
-void		draw_square(t_mlx *mlx, int len);
-void		draw_circle(t_mlx *mlx, int radius);
 void		draw_mandelbrot(t_mlx *mlx);
 
 #endif
