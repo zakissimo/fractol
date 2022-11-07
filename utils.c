@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:06:17 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/07 11:51:18 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/07 17:00:29 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,29 +55,36 @@ int	key_hook(int key, t_mlx *mlx)
 
 int	mouse_hook(int key, int x, int y, t_mlx *mlx)
 {
-	ft_printf("x is %d\n", x);
-	ft_printf("y is %d\n", y);
 	if (key == 4)
 	{
-		mlx->draw->zoom += 5;
-		mlx->draw->x_offset = x;
-		mlx->draw->y_offset = y;
-		mlx->draw->start_x = -x;
-		mlx->draw->end_x = WIDTH - x;
-		mlx->draw->start_y = -y;
-		mlx->draw->end_y = HEIGHT - y;
-		mlx->draw->redraw = true;
+		mlx->draw->zoom += 7;
+		// if (x - (WIDTH / 2) > 0)
+		// 	mlx->draw->x_offset -= 16;
+		// else if (x - (WIDTH / 2) < 0)
+		// 	mlx->draw->x_offset += 16;
+		// if (y - (HEIGHT / 2) > 0)
+		// 	mlx->draw->y_offset -= 9;
+		// else if (y - (HEIGHT / 2) < 0)
+		// 	mlx->draw->y_offset += 9;
 	}
 	if (key == 5)
 	{
-		mlx->draw->zoom -= 5;
-		mlx->draw->x_offset = x;
-		mlx->draw->y_offset = y;
-		mlx->draw->start_x = -x;
-		mlx->draw->end_x = WIDTH - x;
-		mlx->draw->start_y = -y;
-		mlx->draw->end_y = HEIGHT - y;
-		mlx->draw->redraw = true;
+		mlx->draw->zoom -= 7;
+		// if (x - (WIDTH / 2) > 0)
+		// 	mlx->draw->x_offset -= 16;
+		// else if (x - (WIDTH / 2) < 0)
+		// 	mlx->draw->x_offset += 16;
+		// if (y - (HEIGHT / 2) > 0)
+		// 	mlx->draw->y_offset -= 9;
+		// else if (y - (HEIGHT / 2) < 0)
+		// 	mlx->draw->y_offset += 9;
 	}
+	mlx->draw->x_offset = x;
+	mlx->draw->y_offset = y;
+	mlx->draw->start_x = -mlx->draw->x_offset;
+	mlx->draw->end_x = WIDTH - mlx->draw->x_offset;
+	mlx->draw->start_y = -mlx->draw->y_offset;
+	mlx->draw->end_y = HEIGHT - mlx->draw->y_offset;
+	mlx->draw->redraw = true;
 	return (0);
 }

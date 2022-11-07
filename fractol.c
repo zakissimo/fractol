@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/07 11:36:23 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/07 15:56:12 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	get_color(int n, int max_iter)
 	return (tokyo_night[n % 7]);
 }
 
-int	mandelbrot(t_pixel *p, int max_iter, int zoom)
+int	mandelbrot(t_pixel *p, t_draw *draw)
 {
 	int		n;
 	double	new_a;
@@ -31,11 +31,11 @@ int	mandelbrot(t_pixel *p, int max_iter, int zoom)
 	double	old_b;
 
 	n = 0;
-	p->a = (float)p->x / zoom;
-	p->b = (float)p->y / zoom;
+	p->a = (float)p->x / draw->zoom;
+	p->b = (float)p->y / draw->zoom;
 	old_a = p->a;
 	old_b = p->b;
-	while (n < max_iter && fabsl(p->a + p->b) < 3)
+	while (n < draw->max_iter && fabsl(p->a + p->b) < 3)
 	{
 		new_a = p->a * p->a - p->b * p->b;
 		new_b = 2 * p->a * p->b;
@@ -57,7 +57,7 @@ void	draw_mandelbrot(t_mlx *mlx)
 		p.y = mlx->draw->start_y;
 		while (p.y < mlx->draw->end_y)
 		{
-			n = mandelbrot(&p, mlx->draw->max_iter, mlx->draw->zoom);
+			n = mandelbrot(&p, mlx->draw);
 			p.color = get_color(n, mlx->draw->max_iter);
 			put_pixel(mlx, p);
 			p.y++;
