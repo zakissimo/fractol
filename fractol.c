@@ -6,21 +6,17 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/06 19:32:39 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/07 08:30:56 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "mlx/mlx.h"
 
 int	get_color(int n, int max_iter)
 {
-	const int tokyo_night[] = {0xF7768E,
-								0x9ECE6A,
-								0xE0AF68,
-								0x7AA2F7,
-								0x9a7ecc,
-								0x4abaaf,
-								0xa9b1d6};
+	static const int	tokyo_night[] = {0xF7768E, 0x9ECE6A, 0xE0AF68, 0x7AA2F7, 0x9A7ECC, 0x4ABAAF, 0xA9B1D6};
+
 	if (n == max_iter)
 		return (0);
 	return (tokyo_night[n % 7]);
@@ -57,11 +53,11 @@ void	draw_mandelbrot(t_mlx *mlx, int zoom)
 	int		max_iter;
 
 	max_iter = 100;
-	p.x = -WIDTH / 3 * 2;
-	while (p.x < WIDTH / 3)
+	p.x = -WIDTH / 3.0 * 2.0;
+	while (p.x < WIDTH / 3.0)
 	{
-		p.y = -HEIGHT / 2;
-		while (p.y < HEIGHT / 2)
+		p.y = -HEIGHT / 2.0;
+		while (p.y < HEIGHT / 2.0)
 		{
 			n = mandelbrot(&p, max_iter, zoom);
 			p.color = get_color(n, max_iter);
@@ -72,26 +68,34 @@ void	draw_mandelbrot(t_mlx *mlx, int zoom)
 	}
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img->img, 0, 0);
 }
-//
-// int	zoom(int key, t_mlx *mlx)
-// {
-// 	ft_printf("Key pressed: %d\n", key);
-// 	if (key == 4)
-// 	{
-// 		draw_mandelbrot(mlx, 500);
-// 	}
-// 	return (0);
-// }
+
+int	handlebrot(t_mlx *mlx)
+{
+	if (mlx->draw->redraw)
+	{
+		draw_mandelbrot(mlx, mlx->draw->zoom);
+		mlx->draw->redraw = false;
+	}
+	return (0);
+}
+
+void	load_hooks(t_mlx *mlx)
+{
+	mlx_hook(mlx->win, DestroyNotify, StructureNotifyMask, destroy_and_free,
+		mlx);
+	mlx_key_hook(mlx->win, key_hook, mlx);
+	mlx_mouse_hook(mlx->win, mouse_hook, mlx);
+	mlx_loop_hook(mlx->ptr, handlebrot, mlx);
+}
 
 int	main(void)
 {
 	t_mlx	mlx;
 	t_image	image;
+	t_draw	draw;
 
-	init(&mlx, &image);
+	init(&mlx, &image, &draw);
 	load_hooks(&mlx);
-	// mlx_mouse_hook(mlx.win, zoom, &mlx);
-	draw_mandelbrot(&mlx, 300);
 	mlx_loop(mlx.ptr);
 	return (0);
 }

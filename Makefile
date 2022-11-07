@@ -6,13 +6,13 @@
 #    By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/04 08:44:16 by zhabri            #+#    #+#              #
-#    Updated: 2022/11/06 19:26:40 by zhabri           ###   ########.fr        #
+#    Updated: 2022/11/07 08:35:20 by zhabri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= gcc
 
-CFLAGS		= -Wall -Wextra -Werror -g
+CFLAGS		= -Wall -Wextra -Werror -O3
 
 MLXFLAGS	= -Llibft -lft -Lmlx -lmlx -L/usr/lib -lXext -lX11 -lm -lz -lbsd
 
@@ -43,6 +43,8 @@ fclean:		clean
 			make fclean -C libft
 			$(RM) $(NAME)
 
-re:			fclean all
+re:
+			make fclean
+			make all
 
 .PHONY:		all clean fclean re
