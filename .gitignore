@@ -62,5 +62,3 @@ Module.symvers
 Mkfile.old
 dkms.conf
 fractol
-
-mlx/test
