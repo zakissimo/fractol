@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:06:17 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/07 20:08:47 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/08 15:03:56 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,23 @@ int	key_hook(int key, t_mlx *mlx)
 
 int	mouse_hook(int key, int x, int y, t_mlx *mlx)
 {
+	long double	prev_mouse_x;
+	long double	prev_mouse_y;
+	long double	new_mouse_x;
+	long double	new_mouse_y;
+
+	prev_mouse_x = (long double)(x - mlx->draw->x_offset) / mlx->draw->zoom;
+	prev_mouse_y = (long double)(y - mlx->draw->y_offset) / mlx->draw->zoom;
 	if (key == 4)
-		mlx->draw->zoom += 7;
+		mlx->draw->zoom += mlx->draw->zoom / 20;
 	if (key == 5)
-		mlx->draw->zoom -= 7;
-	mlx->draw->x_mouse = (x - mlx->draw->x_offset) / mlx->draw->zoom;
-	mlx->draw->y_mouse = (y - mlx->draw->y_offset) / mlx->draw->zoom;
-	mlx->draw->x_offset = x;
-	mlx->draw->y_offset = y;
+		mlx->draw->zoom -= mlx->draw->zoom / 20;
+	new_mouse_x = (long double)(x - mlx->draw->x_offset) / mlx->draw->zoom;
+	new_mouse_y = (long double)(y - mlx->draw->y_offset) / mlx->draw->zoom;
+	mlx->draw->x_mouse += new_mouse_x - prev_mouse_x;
+	mlx->draw->y_mouse += new_mouse_y - prev_mouse_y;
+	printf("x is %d | y is %d\n", x, y);
+	printf("x_mouse is %Lf | y_mouse is %Lf\n", mlx->draw->x_mouse, mlx->draw->y_mouse);
 	mlx->draw->redraw = true;
 	return (0);
 }

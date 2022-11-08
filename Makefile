@@ -6,11 +6,11 @@
 #    By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/04 08:44:16 by zhabri            #+#    #+#              #
-#    Updated: 2022/11/07 10:30:14 by zhabri           ###   ########.fr        #
+#    Updated: 2022/11/08 13:09:30 by zhabri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC			= gcc
+CC			= clang
 
 CFLAGS		= -Wall -Wextra -Werror -O3 -g
 
