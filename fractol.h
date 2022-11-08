@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/08 11:53:58 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/08 15:32:25 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft/libft.h"
 # include "mlx/mlx.h"
 # include "mlx/mlx_int.h"
+# include <stdlib.h>
 # include <math.h>
 # include <stdbool.h>
 
@@ -43,7 +44,7 @@ typedef struct s_image
 typedef struct s_draw
 {
 	bool		redraw;
-	int			zoom;
+	size_t		zoom;
 	int			max_iter;
 	int			x_offset;
 	int			y_offset;
