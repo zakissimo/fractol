@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/08 15:32:25 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/09 07:43:26 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@
 # include "libft/libft.h"
 # include "mlx/mlx.h"
 # include "mlx/mlx_int.h"
-# include <stdlib.h>
 # include <math.h>
+# include <stdlib.h>
 # include <stdbool.h>
+# include <limits.h>
 
 # define WIDTH 1200
 # define HEIGHT 800
+# define ZOOM_MAX 100000000000000000
 
 typedef struct s_pixel
 {
@@ -50,6 +52,12 @@ typedef struct s_draw
 	int			y_offset;
 	long double	x_mouse;
 	long double	y_mouse;
+	long double	x_key;
+	long double	y_key;
+	long double	x_max;
+	long double	x_min;
+	long double	y_max;
+	long double	y_min;
 }				t_draw;
 
 typedef struct s_mlx

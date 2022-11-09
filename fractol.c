@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/08 14:53:36 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/09 08:06:52 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,20 @@ int	get_color(int n, int max_iter)
 	return (tokyo_night[n % 7]);
 }
 
+void	get_boundries(t_pixel *p, t_draw *draw)
+{
+	if (p->x == 0 && p->y == 0)
+	{
+		draw->x_min = p->a;
+		draw->y_min = p->b;
+	}
+	if (p->x == WIDTH - 1 && p->y == HEIGHT - 1)
+	{
+		draw->x_max = p->a;
+		draw->y_max = p->b;
+	}
+}
+
 int	mandelbrot(t_pixel *p, t_draw *draw)
 {
 	int		n;
@@ -32,10 +46,11 @@ int	mandelbrot(t_pixel *p, t_draw *draw)
 	double	old_b;
 
 	n = 0;
-	p->a = (long double)(p->x - draw->x_offset) / draw->zoom - draw->x_mouse;
-	p->b = (long double)(p->y - draw->y_offset) / draw->zoom - draw->y_mouse;
+	p->a = (long double)(p->x - draw->x_offset) / draw->zoom - draw->x_mouse - draw->x_key;
+	p->b = (long double)(p->y - draw->y_offset) / draw->zoom - draw->y_mouse - draw->y_key;
 	old_a = p->a;
 	old_b = p->b;
+	get_boundries(p, draw);
 	while (n < draw->max_iter && p->a * p->a + p->b * p->b < 4)
 	{
 		new_a = p->a * p->a - p->b * p->b;
@@ -81,7 +96,7 @@ int	handlebrot(t_mlx *mlx)
 void	load_hooks(t_mlx *mlx)
 {
 	mlx_hook(mlx->win, DestroyNotify, StructureNotifyMask, destroy_and_free,
-			mlx);
+		mlx);
 	mlx_key_hook(mlx->win, key_hook, mlx);
 	mlx_mouse_hook(mlx->win, mouse_hook, mlx);
 	mlx_loop_hook(mlx->ptr, handlebrot, mlx);
