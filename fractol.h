@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/09 13:35:30 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/09 14:41:55 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,11 @@ typedef struct s_mlx
 	t_draw		*draw;
 }				t_mlx;
 
+void			usage(void);
 void			init(t_mlx *mlx, t_image *image, t_draw *draw);
 int				destroy_and_free(t_mlx *mlx);
-int				key_hook(int key, t_mlx *mlx);
-int				mouse_hook(int key, int x, int y, t_mlx *mlx);
-int				handlebrot(t_mlx *mlx);
 void			load_hooks(t_mlx *mlx);
-void			put_pixel(t_mlx *mlx, t_pixel p);
-void			draw_mandelbrot(t_mlx *mlx);
+void			draw_fractal(t_mlx *mlx);
 void			pick_color_range(t_draw *draw);
 
 #endif
