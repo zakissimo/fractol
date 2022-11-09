@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:06:17 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/09 08:13:59 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/09 09:59:58 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft/libft.h"
 #include "mlx/mlx.h"
 #include <limits.h>
+#include <stdlib.h>
 
 void	init(t_mlx *mlx, t_image *image, t_draw *draw)
 {
@@ -31,6 +32,7 @@ void	init(t_mlx *mlx, t_image *image, t_draw *draw)
 	draw->y_mouse = 0;
 	draw->x_key = 0;
 	draw->y_key = 0;
+	pick_color_range(draw);
 	mlx->img = image;
 	mlx->draw = draw;
 }
@@ -56,6 +58,20 @@ void	compute_key_offset(int key, t_draw *draw)
 		draw->y_key += -(draw->y_max - draw->y_min) * 5 / 100;
 }
 
+void	pick_color_range(t_draw *draw)
+{
+	static int	n;
+	int const	tokyo_night[7] = {0xF7768E, 0x9ECE6A, 0xE0AF68, 0x7AA2F7, 0x9A7ECC, 0x4ABAAF, 0xA9B1D6};
+	int const	blue_lancelot[7] = {0x7400b8, 0x6930c3, 0x5e60ce, 0x5390d9, 0x4ea8de, 0x48bfe3, 0x56cfe1};
+
+	if (n % 2 == 0)
+		ft_memcpy(draw->color_range, tokyo_night, 7 * sizeof(int));
+	if (n % 2 == 1)
+		ft_memcpy(draw->color_range, blue_lancelot, 7 * sizeof(int));
+	draw->color_range_len = 7;
+	n++;
+}
+
 int	key_hook(int key, t_mlx *mlx)
 {
 	if (key == XK_Escape)
@@ -63,9 +79,12 @@ int	key_hook(int key, t_mlx *mlx)
 		destroy_and_free(mlx);
 		exit(0);
 	}
-	if (key == XK_Right || key == XK_Left || key == XK_Up || key == XK_Down)
+	else
 	{
-		compute_key_offset(key, mlx->draw);
+		if (key == 99)
+			pick_color_range(mlx->draw);
+		if (key == XK_Right || key == XK_Left || key == XK_Up || key == XK_Down)
+			compute_key_offset(key, mlx->draw);
 		mlx->draw->redraw = true;
 	}
 	return (0);

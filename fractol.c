@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/09 08:06:52 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/09 08:58:16 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 #include "libft/libft.h"
 #include "mlx/mlx.h"
 
-int	get_color(int n, int max_iter)
+int	get_color(t_draw *draw, int n, int max_iter)
 {
-	static const int	tokyo_night[] = {0xF7768E, 0x9ECE6A, 0xE0AF68, 0x7AA2F7, 0x9A7ECC, 0x4ABAAF, 0xA9B1D6};
-
 	if (n == max_iter)
 		return (0);
-	return (tokyo_night[n % 7]);
+	return (draw->color_range[n % draw->color_range_len]);
 }
 
 void	get_boundries(t_pixel *p, t_draw *draw)
@@ -74,7 +72,7 @@ void	draw_mandelbrot(t_mlx *mlx)
 		while (p.y < HEIGHT)
 		{
 			n = mandelbrot(&p, mlx->draw);
-			p.color = get_color(n, mlx->draw->max_iter);
+			p.color = get_color(mlx->draw, n, mlx->draw->max_iter);
 			put_pixel(mlx, p);
 			p.y++;
 		}

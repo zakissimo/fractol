@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/09 07:43:26 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/09 09:57:53 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include "libft/libft.h"
 # include "mlx/mlx.h"
 # include "mlx/mlx_int.h"
-# include <math.h>
-# include <stdlib.h>
-# include <stdbool.h>
 # include <limits.h>
+# include <math.h>
+# include <stdbool.h>
+# include <stdlib.h>
 
 # define WIDTH 1200
 # define HEIGHT 800
@@ -50,6 +50,8 @@ typedef struct s_draw
 	int			max_iter;
 	int			x_offset;
 	int			y_offset;
+	int			color_range[7];
+	int			color_range_len;
 	long double	x_mouse;
 	long double	y_mouse;
 	long double	x_key;
@@ -76,5 +78,6 @@ int				handlebrot(t_mlx *mlx);
 void			load_hooks(t_mlx *mlx);
 void			put_pixel(t_mlx *mlx, t_pixel p);
 void			draw_mandelbrot(t_mlx *mlx);
+void			pick_color_range(t_draw *draw);
 
 #endif
