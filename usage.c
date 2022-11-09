@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:35:24 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/09 15:45:32 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/09 15:55:13 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	usage(void)
 	ft_printf("\t\tIf julia is selected providing [a] and\
 [b] becomes mandatory\n");
 	ft_printf("\n");
-	exit(0);
+	exit(1);
 }
