@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 11:04:49 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 12:00:29 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_mlx
 }				t_mlx;
 
 void			usage(void);
-float			ft_atof(char *str, void (*panic)());
+float			ft_atof(char *str, void (*panic)(void));
 void			init(t_mlx *mlx, t_image *image, t_draw *draw);
 void			reset(t_mlx *mlx);
 int				destroy_and_free(t_mlx *mlx);

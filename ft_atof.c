@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 07:51:51 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 09:55:13 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 12:00:11 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	get_neg(char **str)
 	return (neg);
 }
 
-float	ft_atof(char *str, void (*panic)())
+float	ft_atof(char *str, void (*panic)(void))
 {
 	int		i;
 	int		neg;
