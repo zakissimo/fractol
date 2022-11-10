@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:06:17 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 11:50:51 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 13:18:47 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@ static int	mouse_hook(int key, int x, int y, t_mlx *mlx)
 	prev_mouse_x = (long double)(x - mlx->draw->x_offset) / mlx->draw->zoom;
 	prev_mouse_y = (long double)(y - mlx->draw->y_offset) / mlx->draw->zoom;
 	if (key == 4)
-		mlx->draw->zoom += mlx->draw->zoom / 20 + 1;
+		mlx->draw->zoom = mlx->draw->zoom * 1.05 + 1;
 	if (key == 5)
-		mlx->draw->zoom -= mlx->draw->zoom / 20;
+		mlx->draw->zoom /= 1.05;
 	if (mlx->draw->zoom > ZOOM_MAX)
 		mlx->draw->zoom = ZOOM_MAX;
+	if (mlx->draw->zoom < ZOOM_MIN)
+		mlx->draw->zoom = ZOOM_MIN;
 	new_mouse_x = (long double)(x - mlx->draw->x_offset) / mlx->draw->zoom;
 	new_mouse_y = (long double)(y - mlx->draw->y_offset) / mlx->draw->zoom;
 	mlx->draw->x_mouse += new_mouse_x - prev_mouse_x;

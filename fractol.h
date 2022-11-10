@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 12:00:29 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 13:19:13 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define WIDTH 1200
 # define HEIGHT 800
 # define ZOOM_MAX 100000000000000000
+# define ZOOM_MIN 10
 
 typedef struct s_pixel
 {
