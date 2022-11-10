@@ -6,23 +6,11 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:06:17 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/09 14:50:47 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 11:06:26 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-static void	compute_key_offset(int key, t_draw *draw)
-{
-	if (key == XK_Right)
-		draw->x_key += -(draw->x_max - draw->x_min) * 5 / 100;
-	if (key == XK_Left)
-		draw->x_key += (draw->x_max - draw->x_min) * 5 / 100;
-	if (key == XK_Up)
-		draw->y_key += (draw->y_max - draw->y_min) * 5 / 100;
-	if (key == XK_Down)
-		draw->y_key += -(draw->y_max - draw->y_min) * 5 / 100;
-}
 
 static int	key_hook(int key, t_mlx *mlx)
 {
@@ -34,7 +22,9 @@ static int	key_hook(int key, t_mlx *mlx)
 	else
 	{
 		if (key == XK_c)
-			pick_color_range(mlx->draw);
+			pick_color_range(mlx->draw, 0);
+		if (key == XK_r)
+			reset(mlx);
 		if (key == XK_Right || key == XK_Left || key == XK_Up || key == XK_Down)
 			compute_key_offset(key, mlx->draw);
 		if (key == XK_minus)

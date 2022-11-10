@@ -6,11 +6,23 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:07:45 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 10:23:39 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 10:58:15 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	compute_key_offset(int key, t_draw *draw)
+{
+	if (key == XK_Right)
+		draw->x_key += -(draw->x_max - draw->x_min) * 5 / 100;
+	if (key == XK_Left)
+		draw->x_key += (draw->x_max - draw->x_min) * 5 / 100;
+	if (key == XK_Up)
+		draw->y_key += (draw->y_max - draw->y_min) * 5 / 100;
+	if (key == XK_Down)
+		draw->y_key += -(draw->y_max - draw->y_min) * 5 / 100;
+}
 
 static void	put_pixel(t_mlx *mlx, t_pixel p)
 {
@@ -22,13 +34,6 @@ static void	put_pixel(t_mlx *mlx, t_pixel p)
 					/ 8));
 		*(unsigned int *)dst = p.color;
 	}
-}
-
-static int	get_color(t_draw *draw, int n, int max_iter)
-{
-	if (n == max_iter)
-		return (0);
-	return (draw->color_range[n % draw->color_range_len]);
 }
 
 static void	get_boundries(t_pixel *p, t_draw *draw)

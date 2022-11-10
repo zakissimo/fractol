@@ -6,13 +6,20 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:37:51 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/09 15:11:02 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 11:04:42 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	pick_color_range(t_draw *draw)
+int	get_color(t_draw *draw, int n, int max_iter)
+{
+	if (n == max_iter)
+		return (0);
+	return (draw->color_range[n % draw->color_range_len]);
+}
+
+void	pick_color_range(t_draw *draw, int reset)
 {
 	static int	n;
 	int const	tokyo_night[7] = {0xF7768E, 0x9ECE6A, 0xE0AF68,
@@ -24,6 +31,8 @@ void	pick_color_range(t_draw *draw)
 	int const	centiso[7] = {0x27293c, 0x2b2d42, 0x8d99ae,
 		0xedf2f4, 0xef233c, 0xd80032, 0xdc1745};
 
+	if (reset && n)
+		n--;
 	if (n % 4 == 0)
 		ft_memcpy(draw->color_range, tokyo_night, 7 * sizeof(int));
 	else if (n % 4 == 1)

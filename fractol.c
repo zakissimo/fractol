@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 10:24:56 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 11:06:12 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init(t_mlx *mlx, t_image *image, t_draw *draw)
 			&image->endian);
 	draw->zoom = 300;
 	draw->redraw = true;
-	draw->max_iter = 100;
+	draw->max_iter = 70;
 	draw->x_offset = WIDTH / 3 * 2;
 	if (draw->julia)
 		draw->x_offset = WIDTH / 2;
@@ -30,7 +30,7 @@ void	init(t_mlx *mlx, t_image *image, t_draw *draw)
 	draw->y_mouse = 0;
 	draw->x_key = 0;
 	draw->y_key = 0;
-	pick_color_range(draw);
+	pick_color_range(draw, 1);
 	mlx->img = image;
 	mlx->draw = draw;
 }
@@ -42,6 +42,17 @@ int	destroy_and_free(t_mlx *mlx)
 	mlx_destroy_display(mlx->ptr);
 	free(mlx->ptr);
 	exit(0);
+}
+
+void	reset(t_mlx *mlx)
+{
+	mlx_destroy_image(mlx->ptr, mlx->img->img);
+	mlx_destroy_window(mlx->ptr, mlx->win);
+	mlx_destroy_display(mlx->ptr);
+	free(mlx->ptr);
+	init(mlx, mlx->img, mlx->draw);
+	load_hooks(mlx);
+	mlx_loop(mlx->ptr);
 }
 
 int	main(int ac, char **av)

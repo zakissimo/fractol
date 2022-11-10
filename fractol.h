@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 09:59:56 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 11:04:49 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,12 @@ typedef struct s_mlx
 void			usage(void);
 float			ft_atof(char *str, void (*panic)());
 void			init(t_mlx *mlx, t_image *image, t_draw *draw);
+void			reset(t_mlx *mlx);
 int				destroy_and_free(t_mlx *mlx);
 void			load_hooks(t_mlx *mlx);
+void			compute_key_offset(int key, t_draw *draw);
 void			draw_fractal(t_mlx *mlx);
-void			pick_color_range(t_draw *draw);
+void			pick_color_range(t_draw *draw, int reset);
+int				get_color(t_draw *draw, int n, int max_iter);
 
 #endif
