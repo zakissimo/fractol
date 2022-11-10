@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:06:17 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 11:44:28 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 11:50:51 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ static int	mouse_hook(int key, int x, int y, t_mlx *mlx)
 	long double	new_mouse_x;
 	long double	new_mouse_y;
 
-	ft_printf("You're pressing %d\n", key);
-	ft_printf("x is %d, y is %d\n", x, y);
 	prev_mouse_x = (long double)(x - mlx->draw->x_offset) / mlx->draw->zoom;
 	prev_mouse_y = (long double)(y - mlx->draw->y_offset) / mlx->draw->zoom;
 	if (key == 4)
@@ -76,7 +74,7 @@ static int	key_press_hook(int key, t_mlx *mlx)
 	int	x;
 	int	y;
 
-	if (key == XK_f)
+	if (key == XK_f && mlx->draw->julia)
 	{
 		mlx_mouse_get_pos(mlx->ptr, mlx->win, &x, &y);
 		mlx->draw->c_a = (long double)(x - mlx->draw->x_offset)
