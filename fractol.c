@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 15:03:00 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 15:16:48 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,17 @@ int	destroy_and_free(t_mlx *mlx)
 
 void	reset(t_mlx *mlx)
 {
+	bool	smooth;
+
 	mlx_destroy_image(mlx->ptr, mlx->img->img);
 	mlx_destroy_window(mlx->ptr, mlx->win);
 	mlx_destroy_display(mlx->ptr);
 	free(mlx->ptr);
+	smooth = false;
+	if (mlx->draw->smooth)
+		smooth = true;
 	init(mlx, mlx->img, mlx->draw);
+	mlx->draw->smooth = smooth;
 	load_hooks(mlx);
 	mlx_loop(mlx->ptr);
 }
