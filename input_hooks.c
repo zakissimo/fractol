@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:06:17 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 13:18:47 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 15:01:15 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,18 @@
 static int	key_hook(int key, t_mlx *mlx)
 {
 	if (key == XK_Escape)
-	{
 		destroy_and_free(mlx);
-		exit(0);
-	}
 	else
 	{
 		if (key == XK_c)
 			pick_color_range(mlx->draw, 0);
+		if (key == XK_s)
+		{
+			if (mlx->draw->smooth)
+				mlx->draw->smooth = false;
+			else
+				mlx->draw->smooth = true;
+		}
 		if (key == XK_r)
 			reset(mlx);
 		if (key == XK_Right || key == XK_Left || key == XK_Up || key == XK_Down)

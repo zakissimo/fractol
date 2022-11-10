@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:07:45 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 10:58:15 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 14:06:59 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ static int	fractal(t_pixel *p, t_draw *draw)
 		p->b = new_b + old_b;
 		n++;
 	}
+	draw->z = p->a * p->a + p->b * p->b;
 	return (n);
 }
 

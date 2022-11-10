@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 11:06:12 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 15:03:00 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init(t_mlx *mlx, t_image *image, t_draw *draw)
 	draw->y_mouse = 0;
 	draw->x_key = 0;
 	draw->y_key = 0;
+	draw->smooth = false;
 	pick_color_range(draw, 1);
 	mlx->img = image;
 	mlx->draw = draw;

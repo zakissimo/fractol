@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 13:19:13 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 14:59:30 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include "mlx/mlx_int.h"
 # include <limits.h>
 # include <math.h>
-# include <stdbool.h>
 # include <stdlib.h>
+# include <stdbool.h>
 
 # define WIDTH 1200
 # define HEIGHT 800
@@ -53,6 +53,7 @@ typedef struct s_draw
 	int			y_offset;
 	int			color_range[7];
 	int			color_range_len;
+	long double	z;
 	long double	x_mouse;
 	long double	y_mouse;
 	long double	x_key;
@@ -62,6 +63,7 @@ typedef struct s_draw
 	long double	y_max;
 	long double	y_min;
 	bool		julia;
+	bool		smooth;
 	float		c_a;
 	float		c_b;
 }				t_draw;
