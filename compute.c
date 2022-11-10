@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:07:45 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/09 15:17:09 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 10:23:39 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	put_pixel(t_mlx *mlx, t_pixel p)
 
 	if (p.x >= 0 && p.x <= WIDTH && p.y >= 0 && p.y <= HEIGHT)
 	{
-		dst = mlx->img->addr + (p.y * mlx->img->line_len + p.x
-				* (mlx->img->bpp / 8));
+		dst = mlx->img->addr + (p.y * mlx->img->line_len + p.x * (mlx->img->bpp
+					/ 8));
 		*(unsigned int *)dst = p.color;
 	}
 }
@@ -54,12 +54,13 @@ static int	fractal(t_pixel *p, t_draw *draw)
 	double	old_b;
 
 	n = 0;
-	p->a = (long double)(p->x - draw->x_offset) / draw->zoom - draw->x_mouse
-		- draw->x_key;
-	p->b = (long double)(p->y - draw->y_offset) / draw->zoom - draw->y_mouse
-		- draw->y_key;
 	old_a = p->a;
 	old_b = p->b;
+	if (draw->julia)
+	{
+		old_a = draw->c_a;
+		old_b = draw->c_b;
+	}
 	get_boundries(p, draw);
 	while (n < draw->max_iter && p->a * p->a + p->b * p->b < 4)
 	{
@@ -83,6 +84,10 @@ void	draw_fractal(t_mlx *mlx)
 		p.y = 0;
 		while (p.y < HEIGHT)
 		{
+			p.a = (long double)(p.x - mlx->draw->x_offset) / mlx->draw->zoom
+				- mlx->draw->x_mouse - mlx->draw->x_key;
+			p.b = (long double)(p.y - mlx->draw->y_offset) / mlx->draw->zoom
+				- mlx->draw->y_mouse - mlx->draw->y_key;
 			n = fractal(&p, mlx->draw);
 			p.color = get_color(mlx->draw, n, mlx->draw->max_iter);
 			put_pixel(mlx, p);

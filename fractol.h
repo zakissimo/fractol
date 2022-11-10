@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/09 14:41:55 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 09:59:56 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ typedef struct s_draw
 	long double	x_min;
 	long double	y_max;
 	long double	y_min;
+	bool		julia;
+	float		c_a;
+	float		c_b;
 }				t_draw;
 
 typedef struct s_mlx
@@ -71,6 +74,7 @@ typedef struct s_mlx
 }				t_mlx;
 
 void			usage(void);
+float			ft_atof(char *str, void (*panic)());
 void			init(t_mlx *mlx, t_image *image, t_draw *draw);
 int				destroy_and_free(t_mlx *mlx);
 void			load_hooks(t_mlx *mlx);
