@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 15:16:48 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 16:12:32 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init(t_mlx *mlx, t_image *image, t_draw *draw)
 			&image->endian);
 	draw->zoom = 300;
 	draw->redraw = true;
-	draw->max_iter = 70;
+	draw->max_iter = 71;
 	draw->x_offset = WIDTH / 3 * 2;
 	if (draw->julia)
 		draw->x_offset = WIDTH / 2;

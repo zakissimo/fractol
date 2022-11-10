@@ -6,23 +6,33 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:37:51 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 14:59:02 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/10 17:21:14 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	rgb_to_int(int r, int g, int b)
+static int	rgb_to_int(int r, int g, int b)
 {
+	r %= 512;
+	if (r > 255)
+		r = 512 - r - 1;
+	g %= 512;
+	if (g > 255)
+		g = 512 - g - 1;
+	b %= 512;
+	if (b > 255)
+		b = 512 - b - 1;
 	return (r << 16 | g << 8 | b);
 }
 
-int	hsb_to_rgb(float h, float s, float b)
+static int	hsb_to_rgb(float h, float s, float b)
 {
 	float	c;
 	float	x;
 	float	m;
 
+	h = fmod(h, 360.0);
 	c = b * s;
 	x = c * (1 - fabs(fmod((h / 60.0), 2) - 1));
 	m = b - c;
@@ -43,13 +53,13 @@ int	get_color(t_draw *draw, int n, int max_iter)
 {
 	double	v;
 
-	if (draw->smooth)
-	{
-		v = n + 1 - log2(log2(draw->z)) / M_LN2;
-		return (hsb_to_rgb(0.95 + 10 * v, 0.6, 1.0));
-	}
 	if (n == max_iter)
 		return (0);
+	if (draw->smooth)
+	{
+		v = n + 1 - log(log(sqrt(draw->z))) / M_LN2;
+		return (hsb_to_rgb(15 * v + 150, 0.6, 1.0));
+	}
 	return (draw->color_range[n % draw->color_range_len]);
 }
 
