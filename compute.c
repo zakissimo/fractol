@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:07:45 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/11 16:50:49 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/11 18:07:19 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	get_boundries(t_pixel *p, t_draw *draw)
 
 void	draw_fractal(t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw))
 {
-	int		n;
 	t_pixel	p;
 
 	p.x = 0;
@@ -65,7 +64,7 @@ void	draw_fractal(t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw))
 				- mlx->draw->x_mouse - mlx->draw->x_key;
 			p.b = (long double)(p.y - mlx->draw->y_offset) / mlx->draw->zoom
 				- mlx->draw->y_mouse - mlx->draw->y_key;
-			n = fractal(&p, mlx->draw);
+			fractal(&p, mlx->draw);
 			put_pixel(mlx, p);
 			p.y++;
 		}
