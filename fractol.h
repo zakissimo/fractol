@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 14:59:30 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/11 08:25:47 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include "mlx/mlx_int.h"
 # include <limits.h>
 # include <math.h>
-# include <stdlib.h>
 # include <stdbool.h>
+# include <stdlib.h>
 
 # define WIDTH 1200
 # define HEIGHT 800
@@ -62,7 +62,9 @@ typedef struct s_draw
 	long double	x_min;
 	long double	y_max;
 	long double	y_min;
+	bool		mandelbrot;
 	bool		julia;
+	bool		newton;
 	bool		smooth;
 	float		c_a;
 	float		c_b;
@@ -82,8 +84,14 @@ void			init(t_mlx *mlx, t_image *image, t_draw *draw);
 void			reset(t_mlx *mlx);
 int				destroy_and_free(t_mlx *mlx);
 void			load_hooks(t_mlx *mlx);
+void			get_boundries(t_pixel *p, t_draw *draw);
 void			compute_key_offset(int key, t_draw *draw);
-void			draw_fractal(t_mlx *mlx);
+int				mandelbrot(t_pixel *p, t_draw *draw);
+int				julia(t_pixel *p, t_draw *draw);
+int				newton(t_pixel *p, t_draw *draw);
+void			draw_fractal(t_mlx *mlx,
+					int (*fractal)(t_pixel *p, t_draw *draw));
+void			put_pixel(t_mlx *mlx, t_pixel p);
 void			pick_color_range(t_draw *draw, int reset);
 int				get_color(t_draw *draw, int n, int max_iter);
 

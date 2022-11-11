@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:06:17 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 15:01:15 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/11 08:29:18 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,12 @@ static int	handle_fractal(t_mlx *mlx)
 {
 	if (mlx->draw->redraw)
 	{
-		draw_fractal(mlx);
+		if (mlx->draw->mandelbrot)
+			draw_fractal(mlx, &mandelbrot);
+		else if (mlx->draw->julia)
+			draw_fractal(mlx, &julia);
+		else if (mlx->draw->newton)
+			draw_fractal(mlx, &newton);
 		mlx->draw->redraw = false;
 	}
 	return (0);

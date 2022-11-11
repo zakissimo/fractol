@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 16:12:32 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/11 08:39:13 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,24 +62,35 @@ void	reset(t_mlx *mlx)
 	mlx_loop(mlx->ptr);
 }
 
+void	init_fractal(char **av, t_draw *draw)
+{
+	draw->mandelbrot = false;
+	draw->julia = false;
+	draw->newton = false;
+	if (!strncmp(av[1], "mandelbrot", 10))
+		draw->mandelbrot = true;
+	if (!strncmp(av[1], "newton", 6))
+		draw->newton = true;
+	if (!ft_strncmp(av[1], "julia", 5))
+	{
+		draw->julia = true;
+		draw->c_a = ft_atof(av[2], &usage);
+		draw->c_b = ft_atof(av[3], &usage);
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_mlx	mlx;
 	t_image	image;
 	t_draw	draw;
 
-	if ((ac == 2 && ft_strncmp(av[1], "mandelbrot", 10))
+	if ((ac == 2 && (ft_strncmp(av[1], "mandelbrot", 10)
+				&& ft_strncmp(av[1], "newton", 6)))
 		|| ac == 1 || ac > 4 || ac == 3
 		|| (ac == 4 && ft_strncmp(av[1], "julia", 5)))
 		usage();
-	if (!ft_strncmp(av[1], "julia", 5))
-	{
-		draw.julia = true;
-		draw.c_a = ft_atof(av[2], &usage);
-		draw.c_b = ft_atof(av[3], &usage);
-	}
-	else
-		draw.julia = false;
+	init_fractal(av, &draw);
 	init(&mlx, &image, &draw);
 	load_hooks(&mlx);
 	mlx_loop(mlx.ptr);

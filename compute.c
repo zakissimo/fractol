@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:07:45 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 16:39:29 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/11 08:17:19 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	compute_key_offset(int key, t_draw *draw)
 		draw->y_key += -(draw->y_max - draw->y_min) * 5 / 100;
 }
 
-static void	put_pixel(t_mlx *mlx, t_pixel p)
+void	put_pixel(t_mlx *mlx, t_pixel p)
 {
 	char	*dst;
 
@@ -36,7 +36,7 @@ static void	put_pixel(t_mlx *mlx, t_pixel p)
 	}
 }
 
-static void	get_boundries(t_pixel *p, t_draw *draw)
+void	get_boundries(t_pixel *p, t_draw *draw)
 {
 	if (p->x == 0 && p->y == 0)
 	{
@@ -50,36 +50,7 @@ static void	get_boundries(t_pixel *p, t_draw *draw)
 	}
 }
 
-static int	fractal(t_pixel *p, t_draw *draw)
-{
-	int		n;
-	double	new_a;
-	double	new_b;
-	double	old_a;
-	double	old_b;
-
-	n = 0;
-	old_a = p->a;
-	old_b = p->b;
-	if (draw->julia)
-	{
-		old_a = draw->c_a;
-		old_b = draw->c_b;
-	}
-	get_boundries(p, draw);
-	while (n < draw->max_iter && p->a * p->a + p->b * p->b < 100)
-	{
-		new_a = p->a * p->a - p->b * p->b;
-		new_b = 2 * p->a * p->b;
-		p->a = new_a + old_a;
-		p->b = new_b + old_b;
-		n++;
-	}
-	draw->z = p->a * p->a + p->b * p->b;
-	return (n);
-}
-
-void	draw_fractal(t_mlx *mlx)
+void	draw_fractal(t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw))
 {
 	int		n;
 	t_pixel	p;
