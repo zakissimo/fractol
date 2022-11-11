@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/11 11:54:17 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/11 16:45:05 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@
 # define ZOOM_MAX 100000000000000000
 # define ZOOM_MIN 10
 # define PI 3.14159265358979323
+# define TOL 0.0001
 
 typedef struct s_complex
 {
-	long double	real;
-	long double	imaginary;
+	float		real;
+	float		imaginary;
 }				t_complex;
 
 typedef struct s_pixel
@@ -101,5 +102,10 @@ void			draw_fractal(t_mlx *mlx,
 void			put_pixel(t_mlx *mlx, t_pixel p);
 void			pick_color_range(t_draw *draw, int reset);
 int				get_color(t_draw *draw, int n, int max_iter);
+t_complex		add(t_complex *a, t_complex *b);
+t_complex		substract(t_complex *a, t_complex *b);
+t_complex		product(t_complex *a, t_complex *b);
+t_complex		divide(t_complex *a, t_complex *b);
+t_complex		power(t_complex *a, int n);
 
 #endif
