@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/11 08:39:13 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/11 09:48:09 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init(t_mlx *mlx, t_image *image, t_draw *draw)
 	draw->redraw = true;
 	draw->max_iter = 71;
 	draw->x_offset = WIDTH / 3 * 2;
-	if (draw->julia)
+	if (draw->julia || draw->newton)
 		draw->x_offset = WIDTH / 2;
 	draw->y_offset = HEIGHT / 2;
 	draw->x_mouse = 0;

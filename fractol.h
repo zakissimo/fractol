@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/11 08:25:47 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/11 11:54:17 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@
 # define HEIGHT 800
 # define ZOOM_MAX 100000000000000000
 # define ZOOM_MIN 10
+# define PI 3.14159265358979323
+
+typedef struct s_complex
+{
+	long double	real;
+	long double	imaginary;
+}				t_complex;
 
 typedef struct s_pixel
 {

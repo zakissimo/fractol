@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:07:45 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/11 08:17:19 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/11 10:40:33 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	draw_fractal(t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw))
 			p.b = (long double)(p.y - mlx->draw->y_offset) / mlx->draw->zoom
 				- mlx->draw->y_mouse - mlx->draw->y_key;
 			n = fractal(&p, mlx->draw);
-			p.color = get_color(mlx->draw, n, mlx->draw->max_iter);
+			if (!mlx->draw->newton)
+				p.color = get_color(mlx->draw, n, mlx->draw->max_iter);
 			put_pixel(mlx, p);
 			p.y++;
 		}
