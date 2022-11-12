@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:15:10 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/12 14:56:04 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/12 17:28:53 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,33 @@ void	color_sub_region(t_boundries *b, t_mlx *mlx)
 	}
 }
 
-void	rec(int sx, int sy, int ex, int ey, t_boundries *b, t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw))
+void	init_b(t_boundries *b, int sx, int sy, int ex, int ey)
 {
 	b->start_x = sx;
 	b->start_y = sy;
 	b->end_x = ex;
-	b->end_x = ex;
+	b->end_y = ey;
+}
+
+void	rec(t_boundries *b, t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw))
+{
 	if (color_left(b, mlx, fractal) && color_right(b, mlx, fractal)
 		&& color_up(b, mlx, fractal) && color_down(b, mlx, fractal))
-		color_sub_region(b, mlx);
-	else if (ex && ey)
 	{
-		rec(sx, sy, (ex - sx) / 2, (ey - sy) / 2, b, mlx, fractal);
-		rec((ex - sx) / 2, ex, sy, (ey - sy) / 2, b, mlx, fractal);
-		rec((ex - sx) / 2, ex, (ey - sy) / 2, sy, b, mlx, fractal);
-		rec(sx, (ex - sx) / 2, (ey - sy) / 2, sy, b, mlx, fractal);
+		color_sub_region(b, mlx);
+	}
+	else if (b->end_x && b->end_y)
+	{
+		init_b(b, b->start_x, b->start_y, (b->end_x - b->start_x) / 2, (b->end_y - b->start_y) / 2);
+		rec(b, mlx, fractal);
+		init_b(b, (b->end_x - b->start_x) / 2, b->start_y, b->end_x, (b->end_y - b->start_y) / 2);
+		rec(b, mlx, fractal);
+		// init_b(b, (ex - sx) / 2, sy, ex, (ey - sy) / 2);
+		// rec((ex - sx) / 2, sy, ex, (ey - sy) / 2, b, mlx, fractal);
+		// rec((ex - sx) / 2, ex, (ey - sy) / 2, sy, b, mlx, fractal);
+		// init_b(b, (ex - sx) / 2, ex, (ey - sy) / 2, ey);
+		// rec(sx, (ex - sx) / 2, (ey - sy) / 2, sy, b, mlx, fractal);
+		// init_b(b, sx, (ex - sx) / 2, (ey - sy) / 2, ey);
 	}
 }
 
@@ -87,15 +99,8 @@ void	ms(t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw))
 {
 	t_boundries	b;
 
-	b.sx = 0;
-	b.sy = 0;
-	b.ex = WIDTH - 1;
-	b.ey = HEIGHT - 1;
-	b.start_x = 0;
-	b.start_y = 0;
-	b.end_x = WIDTH - 1;
-	b.end_y = HEIGHT - 1;
-	rec(0, 0, WIDTH - 1, HEIGHT - 1, &b, mlx, fractal);
-	complete_canvas(mlx, fractal);
+	init_b(&b, 0, 0, (WIDTH - 1), (HEIGHT - 1));
+	// complete_canvas(mlx, fractal);
+	rec(&b, mlx, fractal);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img->img, 0, 0);
 }

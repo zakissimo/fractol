@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 10:08:32 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/12 13:59:59 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/12 15:47:57 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,26 @@
 bool	color_up(t_boundries *b, t_mlx *mlx,
 			int (*fractal)(t_pixel *p, t_draw *draw))
 {
-	int		i;
-	int		j;
+	int		x;
+	int		y;
 	t_pixel	p;
 	int		prev;
 
 	prev = -1;
-	i = b->start_x;
-	j = b->start_y;
+	x = b->start_x;
+	y = b->start_y;
 	b->same = true;
-	while (i < b->end_x)
+	while (x < b->end_x)
 	{
-		p.x = i;
-		p.y = j;
+		p.x = x;
+		p.y = y;
 		translate_coordinates(mlx, &p);
-		if (mlx->img->canvas[i][j] == -1)
-			mlx->img->canvas[i][j] = fractal(&p, mlx->draw);
-		if (prev != -1 && prev != mlx->img->canvas[i][j])
+		if (mlx->img->canvas[x][y] == -1)
+			mlx->img->canvas[x][y] = fractal(&p, mlx->draw);
+		if (prev != -1 && prev != mlx->img->canvas[x][y])
 			b->same = false;
-		prev = mlx->img->canvas[i][j];
-		i++;
+		prev = mlx->img->canvas[x][y];
+		x++;
 	}
 	b->color = p.color;
 	return (b->same);
@@ -43,26 +43,26 @@ bool	color_up(t_boundries *b, t_mlx *mlx,
 bool	color_down(t_boundries *b, t_mlx *mlx,
 			int (*fractal)(t_pixel *p, t_draw *draw))
 {
-	int		i;
-	int		j;
+	int		x;
+	int		y;
 	t_pixel	p;
 	int		prev;
 
 	prev = -1;
-	i = b->start_x;
-	j = b->end_y;
+	x = b->start_x;
+	y = b->end_y;
 	b->same = true;
-	while (i < b->end_x)
+	while (x < b->end_x)
 	{
-		p.x = i;
-		p.y = j;
+		p.x = x;
+		p.y = y;
 		translate_coordinates(mlx, &p);
-		if (mlx->img->canvas[i][j] == -1)
-			mlx->img->canvas[i][j] = fractal(&p, mlx->draw);
-		if (prev != -1 && prev != mlx->img->canvas[i][j])
+		if (mlx->img->canvas[x][y] == -1)
+			mlx->img->canvas[x][y] = fractal(&p, mlx->draw);
+		if (prev != -1 && prev != mlx->img->canvas[x][y])
 			b->same = false;
-		prev = mlx->img->canvas[i][j];
-		i++;
+		prev = mlx->img->canvas[x][y];
+		x++;
 	}
 	b->color = p.color;
 	return (b->same);
@@ -71,26 +71,26 @@ bool	color_down(t_boundries *b, t_mlx *mlx,
 bool	color_left(t_boundries *b, t_mlx *mlx,
 			int (*fractal)(t_pixel *p, t_draw *draw))
 {
-	int		i;
-	int		j;
+	int		x;
+	int		y;
 	t_pixel	p;
 	int		prev;
 
 	prev = -1;
-	i = b->start_x;
-	j = b->start_y;
+	x = b->start_x;
+	y = b->start_y;
 	b->same = true;
-	while (j < b->end_y)
+	while (y < b->end_y)
 	{
-		p.x = i;
-		p.y = j;
+		p.x = x;
+		p.y = y;
 		translate_coordinates(mlx, &p);
-		if (mlx->img->canvas[i][j] == -1)
-			mlx->img->canvas[i][j] = fractal(&p, mlx->draw);
-		if (prev != -1 && prev != mlx->img->canvas[i][j])
+		if (mlx->img->canvas[x][y] == -1)
+			mlx->img->canvas[x][y] = fractal(&p, mlx->draw);
+		if (prev != -1 && prev != mlx->img->canvas[x][y])
 			b->same = false;
-		prev = mlx->img->canvas[i][j];
-		j++;
+		prev = mlx->img->canvas[x][y];
+		y++;
 	}
 	b->color = p.color;
 	return (b->same);
@@ -99,26 +99,26 @@ bool	color_left(t_boundries *b, t_mlx *mlx,
 bool	color_right(t_boundries *b, t_mlx *mlx,
 			int (*fractal)(t_pixel *p, t_draw *draw))
 {
-	int		i;
-	int		j;
+	int		x;
+	int		y;
 	t_pixel	p;
 	int		prev;
 
 	prev = -1;
-	i = b->end_x;
-	j = b->start_y;
+	x = b->end_x;
+	y = b->start_y;
 	b->same = true;
-	while (j < b->end_y)
+	while (y < b->end_y)
 	{
-		p.x = i;
-		p.y = j;
+		p.x = x;
+		p.y = y;
 		translate_coordinates(mlx, &p);
-		if (mlx->img->canvas[i][j] == -1)
-			mlx->img->canvas[i][j] = fractal(&p, mlx->draw);
-		if (prev != -1 && prev != mlx->img->canvas[i][j])
+		if (mlx->img->canvas[x][y] == -1)
+			mlx->img->canvas[x][y] = fractal(&p, mlx->draw);
+		if (prev != -1 && prev != mlx->img->canvas[x][y])
 			b->same = false;
-		prev = mlx->img->canvas[i][j];
-		j++;
+		prev = mlx->img->canvas[x][y];
+		y++;
 	}
 	b->color = p.color;
 	return (b->same);

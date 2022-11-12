@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 07:37:18 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/12 08:06:46 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/12 15:45:53 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,20 @@ void	init_fractal(char **av, t_draw *draw)
 
 void	init_canvas(t_image *img)
 {
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 
-	i = 0;
+	x = 0;
 	img->canvas = malloc(WIDTH * sizeof(int *));
-	while (i < WIDTH)
+	while (x < WIDTH)
 	{
-		j = 0;
-		img->canvas[i] = malloc(HEIGHT * sizeof(int));
-		while (j < HEIGHT)
+		y = 0;
+		img->canvas[x] = malloc(HEIGHT * sizeof(int));
+		while (y < HEIGHT)
 		{
-			img->canvas[i][j] = -1;
-			j++;
+			img->canvas[x][y] = -1;
+			y++;
 		}
-		i++;
+		x++;
 	}
 }
