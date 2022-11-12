@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 08:06:33 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/12 09:01:43 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/12 18:52:02 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	newton(t_pixel *p, t_draw *draw)
 	one.imaginary = 0;
 	three.real = 3;
 	three.imaginary = 0;
-	get_boundries(p, draw);
+	get_boundries(draw);
 	while (n < draw->max_iter && c_abs(z) > TOL)
 	{
 		z = *compute_new_z(&z, &one, &three);

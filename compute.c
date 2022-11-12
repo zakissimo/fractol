@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:07:45 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/12 07:59:12 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/12 18:53:04 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,16 @@ void	put_pixel(t_mlx *mlx, t_pixel p)
 	}
 }
 
-void	get_boundries(t_pixel *p, t_draw *draw)
+void	get_boundries(t_draw *draw)
 {
-	if (p->x == 0 && p->y == 0)
-	{
-		draw->x_min = p->a;
-		draw->y_min = p->b;
-	}
-	if (p->x == WIDTH - 1 && p->y == HEIGHT - 1)
-	{
-		draw->x_max = p->a;
-		draw->y_max = p->b;
-	}
+	draw->x_min = (long double)(-draw->x_offset) / draw->zoom
+		- draw->x_mouse - draw->x_key;
+	draw->x_max = (long double)((WIDTH - 1) - draw->x_offset) / draw->zoom
+		- draw->x_mouse - draw->x_key;
+	draw->y_min = (long double)(-draw->y_offset) / draw->zoom
+		- draw->y_mouse - draw->y_key;
+	draw->y_max = (long double)((HEIGHT - 1) - draw->y_offset) / draw->zoom
+		- draw->y_mouse - draw->y_key;
 }
 
 void	draw_fractal(t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw))

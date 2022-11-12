@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/12 17:19:19 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/12 18:51:16 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void			reset(t_mlx *mlx);
 void			free_canvas(t_image *img);
 int				destroy_and_free(t_mlx *mlx);
 void			load_hooks(t_mlx *mlx);
-void			get_boundries(t_pixel *p, t_draw *draw);
+void			get_boundries(t_draw *draw);
 void			compute_key_offset(int key, t_draw *draw);
 int				mandelbrot(t_pixel *p, t_draw *draw);
 int				julia(t_pixel *p, t_draw *draw);
