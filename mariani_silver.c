@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:15:10 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/12 13:02:48 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/12 14:56:04 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	color_sub_region(t_boundries *b, t_mlx *mlx)
 		{
 			p.x = i;
 			p.y = j;
-			// mlx->img->canvas[i][j] = p.color;
 			put_pixel(mlx, p);
 			j++;
 		}
@@ -44,32 +43,44 @@ void	color_sub_region(t_boundries *b, t_mlx *mlx)
 	}
 }
 
-void	rec(t_boundries *b, t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw))
+void	rec(int sx, int sy, int ex, int ey, t_boundries *b, t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw))
 {
+	b->start_x = sx;
+	b->start_y = sy;
+	b->end_x = ex;
+	b->end_x = ex;
 	if (color_left(b, mlx, fractal) && color_right(b, mlx, fractal)
 		&& color_up(b, mlx, fractal) && color_down(b, mlx, fractal))
-	{
-		b->color = 0xffffffff;
-		ft_printf("OKAY\n");
 		color_sub_region(b, mlx);
+	else if (ex && ey)
+	{
+		rec(sx, sy, (ex - sx) / 2, (ey - sy) / 2, b, mlx, fractal);
+		rec((ex - sx) / 2, ex, sy, (ey - sy) / 2, b, mlx, fractal);
+		rec((ex - sx) / 2, ex, (ey - sy) / 2, sy, b, mlx, fractal);
+		rec(sx, (ex - sx) / 2, (ey - sy) / 2, sy, b, mlx, fractal);
 	}
-	else
-		ft_printf("PAOKAY\n");
-		// else if (b.end_y - b.start_y > 21 && b.end_x - b.start_x > 21)
-		// {
-		// 	b.end_x = (b.end_x - b.start_x) / 2;
-		// 	b.end_y = (b.end_y - b.start_y) / 2;
-		// 	rec(b, mlx, fractal);
-		// 	b.start_x += b.end_x;
-		// 	b.end_x = b.ex;
-		// 	rec(b, mlx, fractal);
-		// 	b.start_y = b.ey / 2;
-		// 	b.end_y = b.ey;
-		// 	rec(b, mlx, fractal);
-		// 	b.start_x = 0;
-		// 	b.end_x = b.ex / 2;
-		// 	rec(b, mlx, fractal);
-		// }
+}
+
+void	complete_canvas(t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw))
+{
+	t_pixel	p;
+
+	p.x = 0;
+	while (p.x < WIDTH)
+	{
+		p.y = 0;
+		while (p.y < HEIGHT)
+		{
+			if (mlx->img->canvas[p.x][p.y] == -1)
+			{
+				translate_coordinates(mlx, &p);
+				fractal(&p, mlx->draw);
+				put_pixel(mlx, p);
+			}
+			p.y++;
+		}
+		p.x++;
+	}
 }
 
 void	ms(t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw))
@@ -84,6 +95,7 @@ void	ms(t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw))
 	b.start_y = 0;
 	b.end_x = WIDTH - 1;
 	b.end_y = HEIGHT - 1;
-	rec(&b, mlx, fractal);
+	rec(0, 0, WIDTH - 1, HEIGHT - 1, &b, mlx, fractal);
+	complete_canvas(mlx, fractal);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img->img, 0, 0);
 }

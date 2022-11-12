@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 10:08:32 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/12 12:34:07 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/12 13:59:59 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ bool	color_up(t_boundries *b, t_mlx *mlx,
 		i++;
 	}
 	b->color = p.color;
-	ft_printf("color up b->same is %d\n", b->same);
 	return (b->same);
 }
 
@@ -66,7 +65,6 @@ bool	color_down(t_boundries *b, t_mlx *mlx,
 		i++;
 	}
 	b->color = p.color;
-	ft_printf("color down b->same is %d\n", b->same);
 	return (b->same);
 }
 
@@ -95,7 +93,6 @@ bool	color_left(t_boundries *b, t_mlx *mlx,
 		j++;
 	}
 	b->color = p.color;
-	ft_printf("color left b->same is %d\n", b->same);
 	return (b->same);
 }
 
@@ -123,7 +120,6 @@ bool	color_right(t_boundries *b, t_mlx *mlx,
 		prev = mlx->img->canvas[i][j];
 		j++;
 	}
-	ft_printf("color right b->same is %d\n", b->same);
 	b->color = p.color;
 	return (b->same);
 }
