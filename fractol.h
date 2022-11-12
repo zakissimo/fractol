@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/11 16:45:05 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/12 11:01:47 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,20 @@ typedef struct s_complex
 	float		imaginary;
 }				t_complex;
 
+typedef struct s_boundries
+{
+	int		sx;
+	int		sy;
+	int		ex;
+	int		ey;
+	int		start_x;
+	int		start_y;
+	int		end_x;
+	int		end_y;
+	int		color;
+	bool	same;
+}	t_boundries;
+
 typedef struct s_pixel
 {
 	long double	a;
@@ -50,6 +64,7 @@ typedef struct s_image
 	int			bpp;
 	int			line_len;
 	int			endian;
+	int			**canvas;
 }				t_image;
 
 typedef struct s_draw
@@ -89,7 +104,10 @@ typedef struct s_mlx
 void			usage(void);
 float			ft_atof(char *str, void (*panic)(void));
 void			init(t_mlx *mlx, t_image *image, t_draw *draw);
+void			init_fractal(char **av, t_draw *draw);
+void			init_canvas(t_image *img);
 void			reset(t_mlx *mlx);
+void			free_canvas(t_image *img);
 int				destroy_and_free(t_mlx *mlx);
 void			load_hooks(t_mlx *mlx);
 void			get_boundries(t_pixel *p, t_draw *draw);
@@ -107,5 +125,16 @@ t_complex		substract(t_complex *a, t_complex *b);
 t_complex		product(t_complex *a, t_complex *b);
 t_complex		divide(t_complex *a, t_complex *b);
 t_complex		power(t_complex *a, int n);
+void			translate_coordinates(t_mlx *mlx, t_pixel *p);
+bool			color_up(t_boundries *b, t_mlx *mlx,
+					int (*fractal)(t_pixel *p, t_draw *draw));
+bool			color_down(t_boundries *b, t_mlx *mlx,
+					int (*fractal)(t_pixel *p, t_draw *draw));
+bool			color_right(t_boundries *b, t_mlx *mlx,
+					int (*fractal)(t_pixel *p, t_draw *draw));
+bool			color_left(t_boundries *b, t_mlx *mlx,
+					int (*fractal)(t_pixel *p, t_draw *draw));
+void			ms(t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw));
+void			print_canvas(t_image *c);
 
 #endif

@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
+/*   print_canvas.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 07:58:03 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/12 08:13:59 by zhabri           ###   ########.fr       */
+/*   Created: 2022/11/12 07:50:05 by zhabri            #+#    #+#             */
+/*   Updated: 2022/11/12 08:05:03 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	main(int ac, char **av)
+void	print_canvas(t_image *c)
 {
-	t_mlx	mlx;
-	t_image	image;
-	t_draw	draw;
+	int	i;
+	int	j;
 
-	if ((ac == 2 && (ft_strncmp(av[1], "mandelbrot", 10)
-				&& ft_strncmp(av[1], "newton", 6)))
-		|| ac == 1 || ac > 4 || ac == 3
-		|| (ac == 4 && ft_strncmp(av[1], "julia", 5)))
-		usage();
-	init_fractal(av, &draw);
-	init_canvas(&image);
-	init(&mlx, &image, &draw);
-	load_hooks(&mlx);
-	mlx_loop(mlx.ptr);
-	return (0);
+	i = -1;
+	while (++i < WIDTH)
+	{
+		j = -1;
+		while (++j < HEIGHT)
+			ft_printf("c[%d][%d] = %d\n", i, j, c->canvas[i][j]);
+	}
 }

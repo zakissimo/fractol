@@ -6,13 +6,13 @@
 #    By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/04 08:44:16 by zhabri            #+#    #+#              #
-#    Updated: 2022/11/11 15:12:04 by zhabri           ###   ########.fr        #
+#    Updated: 2022/11/12 11:01:14 by zhabri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= clang
 
-CFLAGS		= -Wall -Wextra -Werror -O3
+CFLAGS		= -Wall -Wextra -Werror -O3 -g
 
 MLXFLAGS	= -Llibft -lft -Lmlx -lmlx -L/usr/lib -lXext -lX11 -lm -lz -lbsd
 
@@ -20,7 +20,9 @@ RM			= rm -f
 
 NAME		= fractol
 
-SRCS		= fractol.c compute.c input_hooks.c palette.c usage.c ft_atof.c mandelbrot.c julia.c newton.c complex_calculus.c
+SRCS		= fractol.c compute.c input_hooks.c palette.c usage.c ft_atof.c \
+			  mandelbrot.c julia.c newton.c complex_calculus.c init.c print_canvas.c \
+			  nuke.c mariani_silver.c color_boundries.c
 
 OBJS		= $(SRCS:.c=.o)
 

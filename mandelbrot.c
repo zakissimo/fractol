@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 08:11:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/11 16:51:28 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/12 09:01:30 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ int	mandelbrot(t_pixel *p, t_draw *draw)
 	}
 	draw->z = p->a * p->a + p->b * p->b;
 	p->color = get_color(draw, n, draw->max_iter);
-	return (n);
+	return (p->color);
 }

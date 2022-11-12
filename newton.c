@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 08:06:33 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/11 18:35:32 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/12 09:01:43 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,5 @@ int	newton(t_pixel *p, t_draw *draw)
 		n++;
 	}
 	p->color = color_from_distance(z);
-	return (n);
+	return (p->color);
 }

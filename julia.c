@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 08:11:32 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/11 16:51:17 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/12 09:01:18 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ int	julia(t_pixel *p, t_draw *draw)
 	}
 	draw->z = p->a * p->a + p->b * p->b;
 	p->color = get_color(draw, n, draw->max_iter);
-	return (n);
+	return (p->color);
 }
