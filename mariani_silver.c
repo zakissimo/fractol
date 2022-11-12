@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:15:10 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/12 12:49:14 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/12 13:02:48 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	color_sub_region(t_boundries *b, t_mlx *mlx)
 		{
 			p.x = i;
 			p.y = j;
-			mlx->img->canvas[i][j] = p.color;
+			// mlx->img->canvas[i][j] = p.color;
 			put_pixel(mlx, p);
 			j++;
 		}
