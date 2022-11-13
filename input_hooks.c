@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:06:17 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/12 12:58:41 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/13 08:13:23 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,9 @@ static int	key_press_hook(int key, t_mlx *mlx)
 	int	x;
 	int	y;
 
-	if (key == XK_f && mlx->draw->julia)
+	if (key == XK_f
+		&& mlx->draw->julia
+		&& mlx->draw->zoom == ZOOM)
 	{
 		mlx_mouse_get_pos(mlx->ptr, mlx->win, &x, &y);
 		mlx->draw->c_a = (long double)(x - mlx->draw->x_offset)

@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/12 18:51:16 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/13 09:18:11 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 # define WIDTH 1200
 # define HEIGHT 800
+# define ZOOM 300
+# define MAX_ITER 21
 # define ZOOM_MAX 100000000000000000
 # define ZOOM_MIN 10
 # define PI 3.14159265358979323
@@ -125,15 +127,9 @@ t_complex		substract(t_complex *a, t_complex *b);
 t_complex		product(t_complex *a, t_complex *b);
 t_complex		divide(t_complex *a, t_complex *b);
 t_complex		power(t_complex *a, int n);
+bool			check_color_perimiter(t_boundries *b, t_mlx *mlx,
+					int (*fractal)(t_pixel *p, t_draw *draw));
 void			translate_coordinates(t_mlx *mlx, t_pixel *p);
-bool			color_up(t_boundries *b, t_mlx *mlx,
-					int (*fractal)(t_pixel *p, t_draw *draw));
-bool			color_down(t_boundries *b, t_mlx *mlx,
-					int (*fractal)(t_pixel *p, t_draw *draw));
-bool			color_right(t_boundries *b, t_mlx *mlx,
-					int (*fractal)(t_pixel *p, t_draw *draw));
-bool			color_left(t_boundries *b, t_mlx *mlx,
-					int (*fractal)(t_pixel *p, t_draw *draw));
 void			ms(t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw));
 void			print_canvas(t_image *c);
 
