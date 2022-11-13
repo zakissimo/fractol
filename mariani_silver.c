@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:15:10 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/13 11:10:35 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/13 16:16:31 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,16 @@ void	color_sub_region(t_boundries *b, t_mlx *mlx)
 	int		j;
 	t_pixel	p;
 
-	i = b->start_x;
+	i = b->start_x + 1;
 	p.color = b->color;
 	while (i < b->end_x)
 	{
-		j = b->start_y;
+		j = b->start_y + 1;
 		while (j < b->end_y)
 		{
 			p.x = i;
 			p.y = j;
+			mlx->img->canvas[p.x][p.y] = p.color;
 			put_pixel(mlx, p);
 			j++;
 		}
@@ -69,57 +70,58 @@ t_boundries	init_sub_screens(int n, t_boundries b)
 {
 	if (n == 0)
 	{
-		b.end_x = (b.end_x - b.start_x) / 2;
-		b.end_y = (b.end_y - b.start_y) / 2;
+		b.end_x -= (b.end_x - b.start_x) / 2;
+		b.end_y -= (b.end_y - b.start_y) / 2;
 	}
 	else if (n == 1)
 	{
-		b.start_x = (b.end_x - b.start_x) / 2;
-		b.end_y = (b.end_y - b.start_y) / 2;
+		b.start_x += (b.end_x - b.start_x) / 2;
+		b.end_y -= (b.end_y - b.start_y) / 2;
 	}
 	else if (n == 2)
 	{
-		b.start_x = (b.end_x - b.start_x) / 2;
-		b.start_y = (b.end_y - b.start_y) / 2;
+		b.start_x += (b.end_x - b.start_x) / 2;
+		b.start_y += (b.end_y - b.start_y) / 2;
 	}
 	else if (n == 3)
 	{
-		b.start_y = (b.end_y - b.start_y) / 2;
-		b.end_x = (b.end_x - b.start_x) / 2;
+		b.start_y += (b.end_y - b.start_y) / 2;
+		b.end_x -= (b.end_x - b.start_x) / 2;
 	}
 	return (b);
 }
 
-t_boundries	copy_b(t_boundries b)
+bool	b_is_valid(t_boundries b)
 {
-	return (b);
+	return (b.start_x >= 0 && b.start_y >= 0
+		&& b.end_x > 0 && b.end_y > 0
+		&& b.end_x > b.start_x + 1
+		&& b.end_y > b.start_y + 1
+		&& b.end_x < WIDTH
+		&& b.end_y < HEIGHT);
 }
 
-void	rec(_boundries b, t_mlx *mlx,
+void	rec(int level, t_boundries b, t_mlx *mlx,
 		int (*fractal)(t_pixel *p, t_draw *draw))
 {
 	t_boundries	sub_screen;
 	int			i;
 
-	if (check_color_perimiter(&b, mlx, fractal))
-		color_sub_region(&b, mlx);
-	else if (b.end_x > b.start_x
-		&& b.end_y > b.start_y
-		&& (b.end_x - b.start_x) > 2
-		&& (b.end_y - b.start_y) > 2)
+	i = 0;
+	// ft_printf("Level is %d\n", level);
+	// ft_printf("b s(%d, %d), e(%d, %d)\n", b.start_x, b.start_y, b.end_x, b.end_y);
+	while (i < 4)
 	{
-		i = 0;
-		while (i < 4)
+		sub_screen = init_sub_screens(i, b);
+		// ft_printf("sub s(%d, %d), e(%d, %d)\n", sub_screen.start_x, sub_screen.start_y, sub_screen.end_x, sub_screen.end_y);
+		if (check_color_perimiter(&sub_screen, mlx, fractal))
 		{
-			ft_printf("-------------------------------------\n");
-			ft_printf("i is %d\n", i);
-			sub_screen = init_sub_screens(i, b);
-			ft_printf("sx %d, sy %d, ex %d, ey %d\n", b.start_x, b.start_y, b.end_x, b.end_y);
-			ft_printf("subx %d, suby %d, subex %d, subey %d\n", sub_screen.start_x, sub_screen.start_y, sub_screen.end_x, sub_screen.end_y);
-			ft_printf("-------------------------------------\n");
-			rec(sub_screen, mlx, fractal);
-			i++;
+			color_sub_region(&sub_screen, mlx);
+			// ft_printf("colored yay!!\n");
 		}
+		else if (b_is_valid(sub_screen))
+			rec(level + 1, sub_screen, mlx, fractal);
+		i++;
 	}
 }
 
@@ -131,7 +133,7 @@ void	ms(t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw))
 	b.start_y = 0;
 	b.end_x = (WIDTH - 1);
 	b.end_y = (HEIGHT - 1);
-	// complete_canvas(mlx, fractal);
-	rec(b, mlx, fractal);
+	rec(0, b, mlx, fractal);
+	complete_canvas(mlx, fractal);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img->img, 0, 0);
 }
