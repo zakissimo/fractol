@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/14 08:50:25 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/14 09:50:45 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # define ZOOM 300
 # define ZOOM_MIN 10
 # define ZOOM_MAX 100000000000000000
-# define PI 3.14159265358979323
 # define TOL 0.0001
 
 typedef struct s_complex

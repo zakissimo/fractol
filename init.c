@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 07:37:18 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/14 08:41:46 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/14 09:51:02 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init(t_mlx *mlx, t_image *image, t_draw *draw)
 	image->addr = mlx_get_data_addr(image->img, &image->bpp, &image->line_len,
 			&image->endian);
 	draw->zoom = ZOOM;
-	draw->redraw = true;
+	draw->redraw = false;
 	draw->max_iter = MAX_ITER;
 	draw->x_offset = WIDTH / 3 * 2;
 	if (draw->julia || draw->newton)

@@ -65,3 +65,5 @@ fractol
 
 mlx/test/mlx-test
 kek
+.cache/clangd/index
+compile_commands.json

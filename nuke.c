@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:07:21 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/14 08:35:16 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/14 09:52:21 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	reset(t_mlx *mlx)
 	init_canvas(mlx);
 	init(mlx, mlx->img, mlx->draw);
 	mlx->draw->smooth = smooth;
+	mlx->draw->redraw = true;
 	load_hooks(mlx);
 	mlx_loop(mlx->ptr);
 }
