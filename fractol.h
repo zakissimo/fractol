@@ -6,27 +6,25 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:44:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/13 09:18:11 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/14 08:50:25 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include "libft/libft.h"
-# include "mlx/mlx.h"
-# include "mlx/mlx_int.h"
-# include <limits.h>
 # include <math.h>
+# include "mlx/mlx.h"
 # include <stdbool.h>
-# include <stdlib.h>
+# include "libft/libft.h"
+# include "mlx/mlx_int.h"
 
 # define WIDTH 1200
 # define HEIGHT 800
+# define MAX_ITER 51
 # define ZOOM 300
-# define MAX_ITER 21
-# define ZOOM_MAX 100000000000000000
 # define ZOOM_MIN 10
+# define ZOOM_MAX 100000000000000000
 # define PI 3.14159265358979323
 # define TOL 0.0001
 
@@ -38,10 +36,6 @@ typedef struct s_complex
 
 typedef struct s_boundries
 {
-	int		sx;
-	int		sy;
-	int		ex;
-	int		ey;
 	int		start_x;
 	int		start_y;
 	int		end_x;
@@ -90,6 +84,7 @@ typedef struct s_draw
 	bool		mandelbrot;
 	bool		julia;
 	bool		newton;
+	bool		burning_ship;
 	bool		smooth;
 	float		c_a;
 	float		c_b;
@@ -107,7 +102,7 @@ void			usage(void);
 float			ft_atof(char *str, void (*panic)(void));
 void			init(t_mlx *mlx, t_image *image, t_draw *draw);
 void			init_fractal(char **av, t_draw *draw);
-void			init_canvas(t_image *img);
+void			init_canvas(t_mlx *mlx);
 void			reset(t_mlx *mlx);
 void			free_canvas(t_image *img);
 int				destroy_and_free(t_mlx *mlx);
@@ -117,8 +112,7 @@ void			compute_key_offset(int key, t_draw *draw);
 int				mandelbrot(t_pixel *p, t_draw *draw);
 int				julia(t_pixel *p, t_draw *draw);
 int				newton(t_pixel *p, t_draw *draw);
-void			draw_fractal(t_mlx *mlx,
-					int (*fractal)(t_pixel *p, t_draw *draw));
+int				burning_ship(t_pixel *p, t_draw *draw);
 void			put_pixel(t_mlx *mlx, t_pixel p);
 void			pick_color_range(t_draw *draw, int reset);
 int				get_color(t_draw *draw, int n, int max_iter);
@@ -131,6 +125,8 @@ bool			check_color_perimiter(t_boundries *b, t_mlx *mlx,
 					int (*fractal)(t_pixel *p, t_draw *draw));
 void			translate_coordinates(t_mlx *mlx, t_pixel *p);
 void			ms(t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw));
-void			print_canvas(t_image *c);
+void			color_sub_screen(t_boundries *b, t_mlx *mlx);
+t_boundries		init_sub_screen(int n, t_boundries b);
+bool			b_is_valid(t_boundries b);
 
 #endif

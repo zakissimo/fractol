@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:06:17 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/13 08:13:23 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/14 08:38:52 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,34 +64,21 @@ static int	mouse_hook(int key, int x, int y, t_mlx *mlx)
 	mlx->draw->redraw = true;
 	return (0);
 }
-//
-// static int	handle_fractal(t_mlx *mlx)
-// {
-// 	if (mlx->draw->redraw)
-// 	{
-// 		if (mlx->draw->mandelbrot)
-// 			draw_fractal(mlx, &mandelbrot);
-// 		else if (mlx->draw->julia)
-// 			draw_fractal(mlx, &julia);
-// 		else if (mlx->draw->newton)
-// 			draw_fractal(mlx, &newton);
-// 		mlx->draw->redraw = false;
-// 	}
-// 	return (0);
-// }
 
 static int	handle_fractal(t_mlx *mlx)
 {
 	if (mlx->draw->redraw)
 	{
 		free_canvas(mlx->img);
-		init_canvas(mlx->img);
+		init_canvas(mlx);
 		if (mlx->draw->mandelbrot)
 			ms(mlx, &mandelbrot);
 		else if (mlx->draw->julia)
 			ms(mlx, &julia);
 		else if (mlx->draw->newton)
 			ms(mlx, &newton);
+		else if (mlx->draw->burning_ship)
+			ms(mlx, &burning_ship);
 		mlx->draw->redraw = false;
 	}
 	return (0);

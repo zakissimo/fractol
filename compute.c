@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 10:07:45 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/12 18:53:04 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/14 08:14:56 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,10 @@ void	get_boundries(t_draw *draw)
 		- draw->y_mouse - draw->y_key;
 }
 
-void	draw_fractal(t_mlx *mlx, int (*fractal)(t_pixel *p, t_draw *draw))
+void	translate_coordinates(t_mlx *mlx, t_pixel *p)
 {
-	t_pixel	p;
-
-	p.x = 0;
-	while (p.x < WIDTH)
-	{
-		p.y = 0;
-		while (p.y < HEIGHT)
-		{
-			p.a = (long double)(p.x - mlx->draw->x_offset) / mlx->draw->zoom
-				- mlx->draw->x_mouse - mlx->draw->x_key;
-			p.b = (long double)(p.y - mlx->draw->y_offset) / mlx->draw->zoom
-				- mlx->draw->y_mouse - mlx->draw->y_key;
-			fractal(&p, mlx->draw);
-			put_pixel(mlx, p);
-			p.y++;
-		}
-		p.x++;
-	}
-	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img->img, 0, 0);
+	p->a = (long double)(p->x - mlx->draw->x_offset) / mlx->draw->zoom
+		- mlx->draw->x_mouse - mlx->draw->x_key;
+	p->b = (long double)(p->y - mlx->draw->y_offset) / mlx->draw->zoom
+		- mlx->draw->y_mouse - mlx->draw->y_key;
 }

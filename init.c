@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 07:37:18 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/13 15:42:53 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/14 08:41:46 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	init(t_mlx *mlx, t_image *image, t_draw *draw)
 	if (draw->julia || draw->newton)
 		draw->x_offset = WIDTH / 2;
 	draw->y_offset = HEIGHT / 2;
+	if (draw->burning_ship)
+		draw->y_offset = HEIGHT / 3 * 2;
 	draw->x_mouse = 0;
 	draw->y_mouse = 0;
 	draw->x_key = 0;
@@ -41,6 +43,9 @@ void	init_fractal(char **av, t_draw *draw)
 	draw->mandelbrot = false;
 	draw->julia = false;
 	draw->newton = false;
+	draw->burning_ship = false;
+	if (!strncmp(av[1], "burning_ship", 12))
+		draw->burning_ship = true;
 	if (!strncmp(av[1], "mandelbrot", 10))
 		draw->mandelbrot = true;
 	if (!strncmp(av[1], "newton", 6))
@@ -53,20 +58,24 @@ void	init_fractal(char **av, t_draw *draw)
 	}
 }
 
-void	init_canvas(t_image *img)
+void	init_canvas(t_mlx *mlx)
 {
 	int	x;
 	int	y;
 
 	x = 0;
-	img->canvas = malloc(WIDTH * sizeof(int *));
+	mlx->img->canvas = malloc(WIDTH * sizeof(int *));
+	if (!mlx->img->canvas)
+		destroy_and_free(mlx);
 	while (x < WIDTH)
 	{
 		y = 0;
-		img->canvas[x] = malloc(HEIGHT * sizeof(int));
+		mlx->img->canvas[x] = malloc(HEIGHT * sizeof(int));
+		if (!mlx->img->canvas[x])
+			destroy_and_free(mlx);
 		while (y < HEIGHT)
 		{
-			img->canvas[x][y] = -1;
+			mlx->img->canvas[x][y] = -1;
 			y++;
 		}
 		x++;

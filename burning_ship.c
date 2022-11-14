@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   burning_ship.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 08:11:47 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/14 07:59:39 by zhabri           ###   ########.fr       */
+/*   Created: 2022/11/14 07:59:18 by zhabri            #+#    #+#             */
+/*   Updated: 2022/11/14 08:01:16 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	mandelbrot(t_pixel *p, t_draw *draw)
+int	burning_ship(t_pixel *p, t_draw *draw)
 {
 	int		n;
 	double	new_a;
@@ -28,8 +28,8 @@ int	mandelbrot(t_pixel *p, t_draw *draw)
 	{
 		new_a = p->a * p->a - p->b * p->b;
 		new_b = 2 * p->a * p->b;
-		p->a = new_a + old_a;
-		p->b = new_b + old_b;
+		p->a = fabsl(new_a + old_a);
+		p->b = fabsl(new_b + old_b);
 		n++;
 	}
 	draw->z = p->a * p->a + p->b * p->b;

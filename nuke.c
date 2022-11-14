@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 08:07:21 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/12 08:11:14 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/14 08:35:16 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	free_canvas(t_image *img)
 
 int	destroy_and_free(t_mlx *mlx)
 {
-	free_canvas(mlx->img);
+	if (mlx->img->canvas)
+		free_canvas(mlx->img);
 	mlx_destroy_image(mlx->ptr, mlx->img->img);
 	mlx_destroy_window(mlx->ptr, mlx->win);
 	mlx_destroy_display(mlx->ptr);
@@ -47,7 +48,7 @@ void	reset(t_mlx *mlx)
 	if (mlx->draw->smooth)
 		smooth = true;
 	free_canvas(mlx->img);
-	init_canvas(mlx->img);
+	init_canvas(mlx);
 	init(mlx, mlx->img, mlx->draw);
 	mlx->draw->smooth = smooth;
 	load_hooks(mlx);

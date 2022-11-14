@@ -6,7 +6,7 @@
 #    By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/04 08:44:16 by zhabri            #+#    #+#              #
-#    Updated: 2022/11/12 11:01:14 by zhabri           ###   ########.fr        #
+#    Updated: 2022/11/14 08:21:54 by zhabri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,9 @@ RM			= rm -f
 NAME		= fractol
 
 SRCS		= fractol.c compute.c input_hooks.c palette.c usage.c ft_atof.c \
-			  mandelbrot.c julia.c newton.c complex_calculus.c init.c print_canvas.c \
-			  nuke.c mariani_silver.c color_boundries.c
+			  mandelbrot.c julia.c newton.c complex_calculus.c init.c \
+			  nuke.c mariani_silver.c color_boundries.c burning_ship.c \
+			  sub_screen.c
 
 OBJS		= $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 10:08:32 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/13 09:17:58 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/14 07:42:02 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static int	color_up(t_boundries *b, t_mlx *mlx,
 		translate_coordinates(mlx, &p);
 		if (mlx->img->canvas[p.x][p.y] == -1)
 			mlx->img->canvas[p.x][p.y] = fractal(&p, mlx->draw);
+		p.color = mlx->img->canvas[p.x][p.y];
+		put_pixel(mlx, p);
 		if (prev != -1 && prev != mlx->img->canvas[p.x][p.y])
 			b->same = false;
 		prev = mlx->img->canvas[p.x][p.y];
@@ -53,6 +55,8 @@ static int	color_down(t_boundries *b, t_mlx *mlx,
 		translate_coordinates(mlx, &p);
 		if (mlx->img->canvas[p.x][p.y] == -1)
 			mlx->img->canvas[p.x][p.y] = fractal(&p, mlx->draw);
+		p.color = mlx->img->canvas[p.x][p.y];
+		put_pixel(mlx, p);
 		if (prev != -1 && prev != mlx->img->canvas[p.x][p.y])
 			b->same = false;
 		prev = mlx->img->canvas[p.x][p.y];
@@ -79,6 +83,8 @@ static int	color_left(t_boundries *b, t_mlx *mlx,
 		translate_coordinates(mlx, &p);
 		if (mlx->img->canvas[p.x][p.y] == -1)
 			mlx->img->canvas[p.x][p.y] = fractal(&p, mlx->draw);
+		p.color = mlx->img->canvas[p.x][p.y];
+		put_pixel(mlx, p);
 		if (prev != -1 && prev != mlx->img->canvas[p.x][p.y])
 			b->same = false;
 		prev = mlx->img->canvas[p.x][p.y];
@@ -105,6 +111,8 @@ static int	color_right(t_boundries *b, t_mlx *mlx,
 		translate_coordinates(mlx, &p);
 		if (mlx->img->canvas[p.x][p.y] == -1)
 			mlx->img->canvas[p.x][p.y] = fractal(&p, mlx->draw);
+		p.color = mlx->img->canvas[p.x][p.y];
+		put_pixel(mlx, p);
 		if (prev != -1 && prev != mlx->img->canvas[p.x][p.y])
 			b->same = false;
 		prev = mlx->img->canvas[p.x][p.y];

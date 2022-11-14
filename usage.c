@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:35:24 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/11 08:48:16 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/14 08:11:45 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ void	usage(void)
 	ft_printf("Usage: ./fractol \"FRACTAL set\" [a] [b]\n");
 	ft_printf("\n");
 	ft_printf("\tFRACTAL options:\n");
-	ft_printf("\t\t-\"mandelbrot\"\n");
 	ft_printf("\t\t-\"julia\"\n");
 	ft_printf("\t\t-\"newton\"\n");
+	ft_printf("\t\t-\"mandelbrot\"\n");
+	ft_printf("\t\t-\"burning_ship\"\n");
 	ft_printf("\tNote:\n");
 	ft_printf("\t\tIf julia is selected providing [a] and\
  [b] becomes mandatory.\n");
