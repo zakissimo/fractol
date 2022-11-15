@@ -6,7 +6,7 @@
 /*   By: zhabri <zhabri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:37:51 by zhabri            #+#    #+#             */
-/*   Updated: 2022/11/10 17:21:14 by zhabri           ###   ########.fr       */
+/*   Updated: 2022/11/15 14:39:11 by zhabri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	get_color(t_draw *draw, int n, int max_iter)
 		v = n + 1 - log(log(sqrt(draw->z))) / M_LN2;
 		return (hsb_to_rgb(15 * v + 150, 0.6, 1.0));
 	}
-	return (draw->color_range[n % draw->color_range_len]);
+	return (n * draw->color_range[n % draw->color_range_len]);
 }
 
 void	pick_color_range(t_draw *draw, int reset)
@@ -74,17 +74,23 @@ void	pick_color_range(t_draw *draw, int reset)
 		0xee9b00, 0xca6702, 0xbb3e03, 0x9b2226};
 	int const	centiso[7] = {0x27293c, 0x2b2d42, 0x8d99ae,
 		0xedf2f4, 0xef233c, 0xd80032, 0xdc1745};
+	int const	red[1] = {0x00EEEEEE & 0x000F0F0F};
 
+	draw->color_range_len = 7;
 	if (reset && n)
 		n--;
-	if (n % 4 == 0)
+	if (n % 5 == 0)
 		ft_memcpy(draw->color_range, tokyo_night, 7 * sizeof(int));
-	else if (n % 4 == 1)
+	else if (n % 5 == 1)
 		ft_memcpy(draw->color_range, blue_lancelot, 7 * sizeof(int));
-	else if (n % 4 == 2)
+	else if (n % 5 == 2)
 		ft_memcpy(draw->color_range, seventies, 7 * sizeof(int));
-	else if (n % 4 == 3)
+	else if (n % 5 == 3)
 		ft_memcpy(draw->color_range, centiso, 7 * sizeof(int));
-	draw->color_range_len = 7;
+	else if (n % 5 == 4)
+	{
+		ft_memcpy(draw->color_range, red, 1 * sizeof(int));
+		draw->color_range_len = 1;
+	}
 	n++;
 }
